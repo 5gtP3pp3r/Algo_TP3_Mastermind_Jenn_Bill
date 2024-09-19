@@ -1,7 +1,4 @@
 #pragma once
-
-#include "ListeDouble.h"
-
 #include "Combination.h"
 #include "Color.h"
 

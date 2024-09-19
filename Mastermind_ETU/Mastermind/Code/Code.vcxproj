@@ -160,10 +160,8 @@
     <ClInclude Include="Combination.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="EmptyListException.h" />
-    <ClInclude Include="Iterateur.h" />
     <ClInclude Include="IterateurBase.h" />
     <ClInclude Include="ListeBase.h" />
-    <ClInclude Include="ListeDouble.h" />
     <ClInclude Include="Mastermind.h" />
     <ClInclude Include="Noeud.h" />
     <ClInclude Include="Noeud.hpp" />

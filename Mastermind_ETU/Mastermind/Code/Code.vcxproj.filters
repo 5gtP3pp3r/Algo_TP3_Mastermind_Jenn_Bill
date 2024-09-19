@@ -20,8 +20,6 @@
     <ClInclude Include="IterateurBase.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Iterateur.h" />
-    <ClInclude Include="ListeDouble.h" />
     <ClInclude Include="ListeBase.h">
       <Filter>Interfaces</Filter>
     </ClInclude>

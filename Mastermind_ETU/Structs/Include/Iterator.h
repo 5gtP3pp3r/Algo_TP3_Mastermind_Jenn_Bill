@@ -25,7 +25,7 @@ private:
 template <class T>
 Iterator<T>::Iterator(Node<T> * _current)
 {
-	this->current = &_current;
+	this->current = _current;
 }
 
 template <class T>
@@ -42,13 +42,13 @@ Iterator<T>::~Iterator()
 template <class T>
 bool Iterator<T>::operator!=(const Iterator<T>& iter)
 {
-	return this->current != iter;
+	return this->current->getContent() != iter;
 }
 
 template <class T>
 bool Iterator<T>::operator==(const Iterator<T>& iter)
 {
-	return current == iter;
+	return this->current == iter;
 }
 
 template <class T>
@@ -60,6 +60,6 @@ Iterator<T> Iterator<T>::operator++()
 template <class T>
 T* Iterator<T>::operator & ()
 {
-	return *current->getContent();
+	return current->getContent();
 }
 
