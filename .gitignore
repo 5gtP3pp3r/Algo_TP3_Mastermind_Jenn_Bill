@@ -31,3 +31,10 @@
 *.out
 *.app
 /Mastermind_ETU/Mastermind/.vs/Mastermind
+/Mastermind_ETU/Mastermind/Code/Debug
+/Mastermind_ETU/Mastermind/Debug
+/Mastermind_ETU/Mastermind/Launcher/Debug
+/Mastermind_ETU/Mastermind/TestsCode/Debug/TestsCode.tlog
+*.log
+*.idb
+*.pdb
