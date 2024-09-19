@@ -25,13 +25,13 @@ private:
 template <class T>
 Iterator<T>::Iterator(Node<T> * _current)
 {
-	//TODO: Compléter
+	this->current = &_current;
 }
 
 template <class T>
 Iterator<T>::Iterator()
 {
-	//TODO: Compléter, placer l'itérateur sur ... rien
+	this->current = nullptr;
 }
 
 template <class T>
@@ -42,37 +42,24 @@ Iterator<T>::~Iterator()
 template <class T>
 bool Iterator<T>::operator!=(const Iterator<T>& iter)
 {
-	//TODO: Compléter
-	
-	//Code temporaire pour la compilation
-	return false;
+	return this->current != iter;
 }
 
 template <class T>
 bool Iterator<T>::operator==(const Iterator<T>& iter)
 {
-	//TODO: Compléter
-	
-	//Code temporaire pour la compilation
-	return false;
+	return current == iter;
 }
 
 template <class T>
 Iterator<T> Iterator<T>::operator++()
 {
-	//TODO: Compléter
-	
-	//Code temporaire pour la compilation
-	Iterator<T> iter;
-	return iter;
+	return current->getNext();
 }
 
 template <class T>
 T* Iterator<T>::operator & ()
 {
-	//TODO: Compléter
-	
-	//Code temporaire pour la compilation
-	return NULL;
+	return *current->getContent();
 }
 
