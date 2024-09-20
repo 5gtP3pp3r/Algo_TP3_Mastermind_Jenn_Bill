@@ -31,7 +31,7 @@ Iterator<T>::Iterator(Node<T> * _current)
 template <class T>
 Iterator<T>::Iterator()
 {
-	this->current = nullptr;
+	;
 }
 
 template <class T>
@@ -58,7 +58,12 @@ Iterator<T> Iterator<T>::operator++()
 	{
 		return NULL;
 	}
-	return Iterator<T>(this->current->getNext());
+
+	if (this->current != nullptr) 
+	{
+		this->current = this->current->getNext(); 
+	}
+	return Iterator<T>(this->current);
 }
 
 template <class T>
