@@ -54,6 +54,10 @@ bool Iterator<T>::operator==(const Iterator<T>& iter)
 template <class T>
 Iterator<T> Iterator<T>::operator++()
 {
+	if (current == nullptr || current->getNext() == nullptr)
+	{
+		return NULL;
+	}
 	return current->getNext();
 }
 
