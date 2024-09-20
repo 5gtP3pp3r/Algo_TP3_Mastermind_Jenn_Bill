@@ -6,8 +6,6 @@
 #include <Iterator.h>
 using namespace std;
 
-
-
 template <class T>
 class LinkedList : public DataStructure<T>
 {
@@ -24,7 +22,7 @@ public:
 template <class T>
 LinkedList<T>::LinkedList()
 {
-	
+
 }
 
 template <class T>
@@ -40,7 +38,6 @@ LinkedList<T>::~LinkedList()
 	}
 }
 
-
 template <class T>
 Iterator<T> LinkedList<T>::begin() const
 {
@@ -50,18 +47,22 @@ Iterator<T> LinkedList<T>::begin() const
 template <class T>
 Iterator<T> LinkedList<T>::end() const
 {
-	Node<T>* currentNode = this->getFirstNode();
-	Iterator<T> iter;
-	while(currentNode != nullptr)
-	{
-		if (currentNode->getNext() == nullptr)
-		{
-			iter = currentNode;
-		}
+	Node<T>* currentNode = this->getFirstNode(); 
+	Iterator<T> iter = nullptr;
+	
+	if (currentNode == nullptr) 
+	{		
+		return iter;
 	}
+
+	while (currentNode != nullptr) 
+	{
+		iter = currentNode;
+		currentNode = currentNode->getNext();
+	}
+
 	return iter;
 }
-
 
 template <class T>
 bool LinkedList<T>::add(T* _content)
