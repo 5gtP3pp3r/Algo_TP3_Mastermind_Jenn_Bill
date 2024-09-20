@@ -32,7 +32,7 @@ template <class T>
 int DataStructure<T>::getLength() const
 {
 	int numNodes = 0;
-	Node<T> currentNode = firstNode;
+	Node<T>* currentNode = firstNode;
 	while (currentNode != nullptr)
 	{
 		numNodes++;
