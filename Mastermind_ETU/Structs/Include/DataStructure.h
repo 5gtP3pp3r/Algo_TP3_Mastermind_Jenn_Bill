@@ -9,7 +9,7 @@ class DataStructure
 		DataStructure();
 		~DataStructure();
 		virtual void display() const = 0;
-		int getNumNodes() const;
+		int getLength();
 		Node<T>* getFirstNode() const;
 	protected:
 		void setFirstNode(Node<T>* node);
@@ -29,9 +29,16 @@ DataStructure<T>::~DataStructure()
 
 //TODO: À renommer, voir énoncé
 template <class T>
-int DataStructure<T>::getNumNodes() const
+int DataStructure<T>::getLength()
 {
-	return 0;
+	int numNodes = 0;
+	Node<T> currentNode = firstNode;
+	while (currentNode != nullptr)
+	{
+		numNodes++;
+		currentNode = currentNode->getNext();
+	}
+	return numNodes;
 }
 
 template <class T>
