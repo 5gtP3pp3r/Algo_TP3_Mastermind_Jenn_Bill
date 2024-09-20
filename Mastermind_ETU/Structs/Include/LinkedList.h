@@ -48,20 +48,20 @@ template <class T>
 Iterator<T> LinkedList<T>::end() const
 {
 	Node<T>* currentNode = this->getFirstNode(); 
-	Iterator<T> iter = nullptr;
-	
 	if (currentNode == nullptr) 
 	{		
-		return iter;
+		return Iterator<T>(NULL);
 	}
 
 	while (currentNode != nullptr) 
 	{
-		iter = currentNode;
 		currentNode = currentNode->getNext();
 	}
-
-	return iter;
+	// Retourne la plage mémoire du next du dernier node, c'est null 
+	// (du garbage), mais c'est le bon spot APRÈS le dernier node.
+	// Mais c'est particulier... On ne peut pas simplement retourner un 
+	// Iterator<T> qui contient un pointeur à NULL?
+	return Iterator<T>(currentNode);
 }
 
 template <class T>
