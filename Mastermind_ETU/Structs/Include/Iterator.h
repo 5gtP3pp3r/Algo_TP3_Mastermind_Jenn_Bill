@@ -42,15 +42,13 @@ Iterator<T>::~Iterator()
 template <class T>
 bool Iterator<T>::operator!=(const Iterator<T>& iter)
 {
-	//return this->current->getContent() != iter;        Non fonctionnel, reste à trouver la bonne logique de comparaison.
-	return true;
+	return this->current != iter.current;      
 }
 
 template <class T>
 bool Iterator<T>::operator==(const Iterator<T>& iter)
 {
-	//return this->current == iter;						* same
-	return true;
+	return this->current == iter.current;						
 }
 
 template <class T>
