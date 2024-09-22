@@ -6,12 +6,27 @@ Mastermind::Mastermind(LinkedList<Combination>* _list)
 {
 	generateList(_list);
 	list = _list;
-	list->display();
+	//list->display();
 }
 
 Mastermind::~Mastermind()
 {
-	//TODO: Compléter
+	Node<Combination>* currentCombination = list->getFirstNode();
+	Node<Combination>* nextCombination = nullptr;
+	for (short c1 = 1; c1 < NB_COLORS + 1; c1++)
+	{
+		for (short c2 = 1; c2 < NB_COLORS + 1; c2++)
+		{
+			for (short c3 = 1; c3 < NB_COLORS + 1; c3++)
+			{
+				for (short c4 = 1; c4 < NB_COLORS + 1; c4++)
+				{
+					nextCombination = currentCombination->getNext();
+					delete currentCombination;
+				}
+			}
+		}
+	}
 }
 
 
