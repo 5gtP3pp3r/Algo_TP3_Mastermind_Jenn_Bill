@@ -33,7 +33,7 @@ bool Combination::operator == (const Combination& _combination) const
 {
 	//TODO : Compléter
 	
-	return true;
+	return *this == _combination;
 }
 
 bool Combination::operator != (const Combination& _combination) const
