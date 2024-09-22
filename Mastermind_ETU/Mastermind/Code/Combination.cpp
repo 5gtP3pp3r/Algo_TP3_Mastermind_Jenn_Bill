@@ -43,8 +43,12 @@ bool Combination::operator != (const Combination& _combination) const
 
 void Combination::display() const
 {
-	cout << "[" << tabColors[0] << endl;
+	cout << "[" << tabColors[0] << ", " 
+		 << tabColors[1] << ", " 
+		 << tabColors[2] << ", " 
+		 << tabColors[3] << "]" << endl;
+    /*cout << tabColors[0] << endl;
 	cout << tabColors[1] << endl;
 	cout << tabColors[2] << endl;
-	cout << tabColors[3] << "]" << endl;
+	cout << tabColors[3] << "]" << endl;*/
 }
