@@ -24,4 +24,6 @@ private:
 	bool isPossibleCombination(Combination* _toValidate, Combination* _ref, short* _tabVerdicts);
     Combination* tabCombinations[NB_POSSIBLE_COMBINATIONS];
     LinkedList<Combination>* list; //Contient toutes les combinaisons de couleurs possibles, selon le contexte.
+
+    void generateList(LinkedList<Combination>* _list);
 };
