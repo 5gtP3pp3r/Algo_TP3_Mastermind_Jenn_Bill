@@ -13,7 +13,9 @@ Mastermind::~Mastermind()
 {
 	Node<Combination>* currentCombination = list->getFirstNode();
 	Node<Combination>* nextCombination = nullptr;
-	int listLength = pow(NB_COLORS, COMBINATION_LENGTH);
+
+	int listLength = pow(NB_COLORS, COMBINATION_LENGTH); // NB_COLORS exposant COMBINATION_LENGTH (8^4 ou (8*8*8*8)) = 4096
+
 	for (int node = 0; node < listLength; node++)
 	{
 		nextCombination = currentCombination->getNext();
