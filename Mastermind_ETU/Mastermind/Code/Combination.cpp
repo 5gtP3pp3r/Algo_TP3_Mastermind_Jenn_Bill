@@ -1,4 +1,5 @@
 #include "Combination.h"
+#include "constants.h"
 
 
 Combination::Combination(Color c1, Color c2, Color c3, Color c4)
@@ -31,9 +32,14 @@ bool Combination::operator > (const Combination& _combination) const
 
 bool Combination::operator == (const Combination& _combination) const
 {
-	//TODO : Compléter
-	
-	return *this == _combination;
+	for (int color = 0; color < COMBINATION_LENGTH; ++color)
+	{
+		if (this->tabColors[color] != _combination.tabColors[color])
+		{
+			return false;
+		}
+	}
+	return true;
 }
 
 bool Combination::operator != (const Combination& _combination) const
