@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "stdafx.h"
 #include "Node.h"
 #include <string>
