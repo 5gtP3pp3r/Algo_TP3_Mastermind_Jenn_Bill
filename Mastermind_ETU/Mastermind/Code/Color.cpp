@@ -67,7 +67,8 @@ void Color::operator=(const Color& c){
     color = c.color;
 }
 
-short Color::convertToNumeric(){
+short Color::convertToNumeric() const   // "
+{
     return color;
 }
 

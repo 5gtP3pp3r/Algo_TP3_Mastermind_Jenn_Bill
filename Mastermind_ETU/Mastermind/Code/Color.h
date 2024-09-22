@@ -20,7 +20,7 @@ public:
 
     void operator=(const Color& _c);
  
-    short convertToNumeric();
+    short convertToNumeric() const; // "
 
     void setColor(short _c);
     short getColor();
