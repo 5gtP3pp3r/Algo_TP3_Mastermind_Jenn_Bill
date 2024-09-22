@@ -43,20 +43,23 @@ ostream& operator<<(ostream& sortie, const Color& c)
     return sortie;
 }
 
-bool Color::operator==(const Color& c)
+bool Color::operator==(const Color& c) const    // "const" manquand pour faire fonctionner les surchrges d'operateurs dans Combination)
 { 
     return color == c.color;
 }
 
-bool Color::operator>(const Color& c){
+bool Color::operator>(const Color& c) const     // "
+{
     return color > c.color;
 }
 
-bool Color::operator<(const Color& c){
+bool Color::operator<(const Color& c) const     // "
+{
     return color < c.color;
 }
 
-bool Color::operator!=(const Color& c){
+bool Color::operator!=(const Color& c) const    // "
+{
     return color != c.color;
 }
 
