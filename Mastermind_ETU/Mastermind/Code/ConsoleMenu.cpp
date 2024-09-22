@@ -26,7 +26,7 @@ void ConsoleMenu::run()
     while (gameContinue) {
 
         Mastermind mastermind(list);
-
+        //list->display();  // Test si la liste existe.
         Color tabColors[COMBINATION_LENGTH]; //4 couleurs parmi un choix de 8
 
         if (readSequence(tabColors))
