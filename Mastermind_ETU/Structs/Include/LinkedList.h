@@ -149,12 +149,15 @@ void LinkedList<T>::display() const
 	Node<T>* currentNode = this->getFirstNode();
 	if (!currentNode)
 	{
-		//cout << "La liste est vide" << endl << endl;
+		cout << "La liste est vide" << endl << endl;
 	}
+	int rank = 1;
 	while (currentNode != nullptr)
 	{
+		cout << rank << " ";
 		currentNode->getContent()->display();
 		currentNode = currentNode->getNext();
+		rank++;
 	}
 }
 
