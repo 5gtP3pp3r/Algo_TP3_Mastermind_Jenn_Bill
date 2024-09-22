@@ -13,19 +13,11 @@ Mastermind::~Mastermind()
 {
 	Node<Combination>* currentCombination = list->getFirstNode();
 	Node<Combination>* nextCombination = nullptr;
-	for (short c1 = 1; c1 < NB_COLORS + 1; c1++)
+	int listLength = pow(NB_COLORS, COMBINATION_LENGTH);
+	for (int node = 0; node < listLength; node++)
 	{
-		for (short c2 = 1; c2 < NB_COLORS + 1; c2++)
-		{
-			for (short c3 = 1; c3 < NB_COLORS + 1; c3++)
-			{
-				for (short c4 = 1; c4 < NB_COLORS + 1; c4++)
-				{
-					nextCombination = currentCombination->getNext();
-					delete currentCombination;
-				}
-			}
-		}
+		nextCombination = currentCombination->getNext();
+		delete currentCombination;
 	}
 }
 
@@ -56,7 +48,7 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 
 	//Voici un ébauche d'algorithme qui devrait vous aider à compléter cette méthode:
 	//Pour chacune des couleurs de la combinaison toValidate, vérifiez:
-	
+
 	//Si le verdict est 1 (Bonne couleur, bonne place) et que la combinaison de couleurs à valider n'a pas la couleur à la même place que 
 	//la combinaison essayée, il faut la retirer de la liste.
 
@@ -67,11 +59,11 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 
 	//Retournez true si la combinaison est valide (respecte les verdicts) et false dans le cas contraire.
 
-	
+
 	bool keepCombination = true;
-	
+
 	//TODO: Compléter l'algorithme ici
-	
+
 	return keepCombination;
 }
 
