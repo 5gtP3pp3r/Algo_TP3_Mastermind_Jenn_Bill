@@ -65,6 +65,34 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 
 	//Retournez true si la combinaison est valide (respecte les verdicts) et false dans le cas contraire.
 
+	/*for (int i = 0; i < VERDICTS_LENGTH; i++)
+	{
+		if (_tabVerdicts[i] != 1) 
+		{
+			return false;
+		}
+		return true;
+	}*/
+
+	Color color = NULL;
+	for (int i = 0; i < VERDICTS_LENGTH; i++)
+	{
+		if (_tabVerdicts[i] != 3)
+		{
+			color = _tried->getColor(i);
+		}
+
+	}
+	
+	/*Iterator<Combination> iter = list->begin();   pas full bon!!!
+	int i = 0;
+	while (&iter != NULL)
+	{
+		if (_toValidate->getColor(i) != color)
+		list->remove(&iter);
+		++iter;
+		i++;
+	}*/
 
 	bool keepCombination = true;
 
