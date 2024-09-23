@@ -39,3 +39,4 @@
 *.idb
 *.pdb
 /Mastermind_ETU/Mastermind/TestsCode/Debug
+/.vs
