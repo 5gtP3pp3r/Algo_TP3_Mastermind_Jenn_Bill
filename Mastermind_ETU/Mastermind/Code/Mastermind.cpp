@@ -11,18 +11,13 @@ Mastermind::Mastermind(LinkedList<Combination>* _list)
 
 Mastermind::~Mastermind()
 {
-	Node<Combination>* currentCombination = list->getFirstNode();
-	Node<Combination>* nextCombination = nullptr;
-
 	int listLength = pow(NB_COLORS, COMBINATION_LENGTH); // NB_COLORS exposant COMBINATION_LENGTH (8^4 ou (8*8*8*8)) = 4096
 
-	for (int node = 0; node < listLength; node++)
+	for (int combi = 0; combi < listLength; combi++)
 	{
-		nextCombination = currentCombination->getNext();
-		delete currentCombination;
+		delete tabCombinations[combi];
 	}
 }
-
 
 int Mastermind::getNbElements() const
 {
