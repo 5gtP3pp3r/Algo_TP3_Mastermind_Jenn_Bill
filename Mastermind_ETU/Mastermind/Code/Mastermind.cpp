@@ -24,8 +24,7 @@ Mastermind::~Mastermind()
 
 int Mastermind::getNbElements() const
 {
-	//TODO: Compléter
-	return 0;
+	return this->list->getLength();
 }
 
 /// <summary>
@@ -35,8 +34,15 @@ int Mastermind::getNbElements() const
 /// <returns>L'élément qui est à la position index</returns>
 Combination* Mastermind::getElement(int index) const
 {
-	//TODO: Compléter
-	return NULL;
+	int i = 0;
+	Iterator<Combination> iter= list->begin();
+	while (i < index) 
+	{
+		++iter;
+		i++;
+	}
+
+	return &iter;
 }
 
 bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts)
