@@ -30,7 +30,7 @@ namespace IteratorTest
 			iter2 = l.end();
 
 			//IterAccess est une classe amie (friend) à Iterator
-			//Elle a accès à ses attributs privés pour insecter le noeud sur lequel l'itérateur est positionné
+			//Elle a accès à ses attributs privés pour inspecter le nœud sur lequel l'itérateur est positionné
 			//Ceci va vous servir dans vos tests
 			IterAccess<Book> ia(iter1);
 			ia.getCurrentNode();
