@@ -80,6 +80,7 @@ void Mastermind::generateList(LinkedList<Combination>* _list)
 				for (short c4 = 1; c4 < NB_COLORS + 1; c4++)
 				{
 					_list->add(new Combination(Color(c1), Color(c2), Color(c3), Color(c4)));
+					tabCombinations[c1, c2, c3, c4];
 				}
 			}
 		}
