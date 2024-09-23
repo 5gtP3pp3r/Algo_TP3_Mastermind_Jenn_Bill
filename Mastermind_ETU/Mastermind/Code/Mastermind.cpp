@@ -5,15 +5,18 @@
 Mastermind::Mastermind(LinkedList<Combination>* _list)
 {
 	generateList(_list);
+	fillTab(_list);
 	list = _list;
 	//list->display();
+	for (int i = 0; i < LISTLENGTH; i++)
+	{
+		tabCombinations[i]->display();
+	}
 }
 
 Mastermind::~Mastermind()
 {
-	int listLength = pow(NB_COLORS, COMBINATION_LENGTH); // NB_COLORS exposant COMBINATION_LENGTH (8^4 ou (8*8*8*8)) = 4096
-
-	for (int combi = 0; combi < listLength; combi++)
+	for (int combi = 0; combi < LISTLENGTH; combi++)
 	{
 		delete tabCombinations[combi];
 	}
@@ -74,11 +77,20 @@ void Mastermind::generateList(LinkedList<Combination>* _list)
 			{
 				for (short c4 = 1; c4 < NB_COLORS + 1; c4++)
 				{
-					_list->add(new Combination(Color(c1), Color(c2), Color(c3), Color(c4)));
-					tabCombinations[c1, c2, c3, c4];
+					_list->add(new Combination(Color(c1), Color(c2), Color(c3), Color(c4)));					
 				}
 			}
 		}
+	}	
+}
+
+void Mastermind::fillTab(LinkedList<Combination>* _list)
+{
+	Node<Combination>* currentNode = _list->getFirstNode();
+	for (int i = 0; i < LISTLENGTH; i++)
+	{
+		tabCombinations[i] = currentNode->getContent();
+		currentNode = currentNode->getNext();
 	}
 }
 

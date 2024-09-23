@@ -26,4 +26,5 @@ private:
     LinkedList<Combination>* list; //Contient toutes les combinaisons de couleurs possibles, selon le contexte.
 
     void generateList(LinkedList<Combination>* _list);
+    void fillTab(LinkedList<Combination>* _list);
 };
