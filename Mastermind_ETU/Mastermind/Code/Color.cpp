@@ -76,7 +76,7 @@ void Color::setColor(short _c){
     color = _c;
 }
 
-short Color::getColor()
+short Color::getColor() const
 {
     return this->color;
 }

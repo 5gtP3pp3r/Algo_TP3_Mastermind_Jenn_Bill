@@ -23,7 +23,7 @@ public:
     short convertToNumeric() const; // "
 
     void setColor(short _c);
-    short getColor();
+    short getColor() const;
 
 private:
     short color;
