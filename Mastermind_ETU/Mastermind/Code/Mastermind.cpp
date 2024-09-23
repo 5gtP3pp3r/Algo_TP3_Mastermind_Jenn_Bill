@@ -14,8 +14,7 @@ Mastermind::~Mastermind()
 
 int Mastermind::getNbElements() const
 {
-	//TODO: Compléter
-	return 0;
+	return this->list->getLength();
 }
 
 /// <summary>
@@ -25,8 +24,14 @@ int Mastermind::getNbElements() const
 /// <returns>L'élément qui est à la position index</returns>
 Combination* Mastermind::getElement(int index) const
 {
-	//TODO: Compléter
-	return NULL;
+	int i = 0;
+	Iterator<Combination> iter= list->begin();
+	while (i < index) 
+	{
+		++iter;
+	}
+
+	return ;
 }
 
 bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts)
@@ -38,7 +43,7 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 
 	//Voici un ébauche d'algorithme qui devrait vous aider à compléter cette méthode:
 	//Pour chacune des couleurs de la combinaison toValidate, vérifiez:
-	
+
 	//Si le verdict est 1 (Bonne couleur, bonne place) et que la combinaison de couleurs à valider n'a pas la couleur à la même place que 
 	//la combinaison essayée, il faut la retirer de la liste.
 
@@ -49,11 +54,11 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 
 	//Retournez true si la combinaison est valide (respecte les verdicts) et false dans le cas contraire.
 
-	
+
 	bool keepCombination = true;
-	
+
 	//TODO: Compléter l'algorithme ici
-	
+
 	return keepCombination;
 }
 
