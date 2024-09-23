@@ -49,7 +49,7 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 {
 	//A COMPLETER
 	//Vérifiez si la combinaison toValidate doit être gardée ou non de la liste, en fonction d'une combinaison essayée et d'un tableau de 4 verdicts.
-	//Pour chacune des couleurs présentes dans toValidate, 3 verdicts possibles doivent être pris en considération pour éléminer ou non la combinaison, 
+	//Pour chacune des couleurs présentes dans toValidate, 3 verdicts possibles doivent être pris en considération pour éliminer ou non la combinaison, 
 	//il s'agit de "Bonne couleur, bonne place" (valeur 1), "Bonne couleur, mauvaise place" (valeur 2) et "Mauvaise couleur" (valeur 3).
 
 	//Voici un ébauche d'algorithme qui devrait vous aider à compléter cette méthode:
