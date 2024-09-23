@@ -23,8 +23,6 @@
     <ClInclude Include="ListeBase.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Noeud.h" />
-    <ClInclude Include="Noeud.hpp" />
     <ClInclude Include="constants.h" />
   </ItemGroup>
   <ItemGroup>

@@ -163,8 +163,6 @@
     <ClInclude Include="IterateurBase.h" />
     <ClInclude Include="ListeBase.h" />
     <ClInclude Include="Mastermind.h" />
-    <ClInclude Include="Noeud.h" />
-    <ClInclude Include="Noeud.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
