@@ -67,33 +67,6 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 	return keepCombination;
 }
 
-void Mastermind::generateList(LinkedList<Combination>* _list)
-{
-	for (short c1 = 1; c1 < NB_COLORS + 1; c1++)
-	{
-		for (short c2 = 1; c2 < NB_COLORS + 1; c2++)
-		{
-			for (short c3 = 1; c3 < NB_COLORS + 1; c3++)
-			{
-				for (short c4 = 1; c4 < NB_COLORS + 1; c4++)
-				{
-					_list->add(new Combination(Color(c1), Color(c2), Color(c3), Color(c4)));					
-				}
-			}
-		}
-	}	
-}
-
-void Mastermind::fillTab(LinkedList<Combination>* _list)
-{
-	Node<Combination>* currentNode = _list->getFirstNode();
-	for (int i = 0; i < LISTLENGTH; i++)
-	{
-		tabCombinations[i] = currentNode->getContent();
-		currentNode = currentNode->getNext();
-	}
-}
-
 int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 {
 	//A COMPLETER
@@ -106,4 +79,31 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 	//TODO: Compléter
 
 	return 0;
+}
+
+void Mastermind::generateList(LinkedList<Combination>* _list)
+{
+	for (short c1 = 1; c1 < NB_COLORS + 1; c1++)
+	{
+		for (short c2 = 1; c2 < NB_COLORS + 1; c2++)
+		{
+			for (short c3 = 1; c3 < NB_COLORS + 1; c3++)
+			{
+				for (short c4 = 1; c4 < NB_COLORS + 1; c4++)
+				{
+					_list->add(new Combination(Color(c1), Color(c2), Color(c3), Color(c4)));
+				}
+			}
+		}
+	}
+}
+
+void Mastermind::fillTab(LinkedList<Combination>* _list)
+{
+	Node<Combination>* currentNode = _list->getFirstNode();
+	for (int i = 0; i < LISTLENGTH; i++)
+	{
+		tabCombinations[i] = currentNode->getContent();
+		currentNode = currentNode->getNext();
+	}
 }
