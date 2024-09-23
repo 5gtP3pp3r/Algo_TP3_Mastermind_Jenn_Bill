@@ -1,4 +1,5 @@
 #include "Combination.h"
+#include "constants.h"
 
 
 Combination::Combination(Color c1, Color c2, Color c3, Color c4)
@@ -19,20 +20,57 @@ Combination::~Combination()
 {
 }
 
-bool Combination::operator< (const Combination& _combination) const
+bool Combination::operator < (const Combination& _combination) const
 {
-	return true;
+	int leftHand = 0;
+	int multiplier = 1000;
+	for (short color = 0; color < COMBINATION_LENGTH; color++)
+	{
+		leftHand += this->tabColors[color].convertToNumeric() * multiplier;
+		multiplier /= 10;
+	}
+
+	int rightHand = 0;
+	multiplier = 1000;
+	for (short color = 0; color < COMBINATION_LENGTH; color++)
+	{
+		rightHand += _combination.tabColors[color].convertToNumeric() * multiplier;
+		multiplier /= 10;
+	}
+
+	return leftHand < rightHand;
 }
 
 bool Combination::operator > (const Combination& _combination) const
 {
-	return true;
+	int leftHand = 0;
+	int multiplier = 1000;
+	for (short color = 0; color < COMBINATION_LENGTH; color++)
+	{
+		leftHand += this->tabColors[color].convertToNumeric() * multiplier;
+		multiplier /= 10;
+	}
+
+	int rightHand = 0;
+	multiplier = 1000;
+	for (short color = 0; color < COMBINATION_LENGTH; color++)
+	{
+		rightHand += _combination.tabColors[color].convertToNumeric() * multiplier;
+		multiplier /= 10;
+	}
+
+	return leftHand > rightHand;
 }
 
 bool Combination::operator == (const Combination& _combination) const
 {
-	//TODO : Compléter
-	
+	for (int color = 0; color < COMBINATION_LENGTH; ++color)
+	{
+		if (this->tabColors[color] != _combination.tabColors[color])
+		{
+			return false;
+		}
+	}
 	return true;
 }
 
@@ -43,8 +81,12 @@ bool Combination::operator != (const Combination& _combination) const
 
 void Combination::display() const
 {
-	cout << tabColors[0] << endl;
+	cout << "[" << tabColors[0] << ", "
+		<< tabColors[1] << ", "
+		<< tabColors[2] << ", "
+		<< tabColors[3] << "]" << endl;
+	/*cout << tabColors[0] << endl;
 	cout << tabColors[1] << endl;
 	cout << tabColors[2] << endl;
-	cout << tabColors[3] << endl;
+	cout << tabColors[3] << "]" << endl;*/
 }
