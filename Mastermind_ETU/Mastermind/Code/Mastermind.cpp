@@ -39,9 +39,10 @@ Combination* Mastermind::getElement(int index) const
 	while (i < index) 
 	{
 		++iter;
+		i++;
 	}
 
-	return ;
+	return &iter;
 }
 
 bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts)
