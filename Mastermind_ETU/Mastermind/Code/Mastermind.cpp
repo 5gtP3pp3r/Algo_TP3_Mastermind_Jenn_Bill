@@ -16,7 +16,7 @@ Mastermind::Mastermind(LinkedList<Combination>* _list)
 
 Mastermind::~Mastermind()
 {
-	for (int node = 0; node < LISTLENGTH; node++)
+	for (short node = 0; node < LISTLENGTH; node++)
 	{
 		delete tabCombinations[node];
 	}
@@ -34,7 +34,7 @@ int Mastermind::getNbElements() const
 /// <returns>L'élément qui est à la position index</returns>
 Combination* Mastermind::getElement(int _index) const
 {
-	int index = 0;
+	short index = 0;
 	Iterator<Combination> iter = list->begin();
 	while (index < _index)
 	{
@@ -111,7 +111,7 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 	//Cette fonction appelle isPossibleCombination pour savoir si la combinaison inspectée est à garder ou non
 
 	//TODO: Compléter
-	int removedCombinations = 0;
+	short removedCombinations = 0;
 	Iterator<Combination> iter = list->begin();
 
 	while (iter != nullptr)
@@ -147,7 +147,7 @@ void Mastermind::generateList(LinkedList<Combination>* _list)
 void Mastermind::fillTab(LinkedList<Combination>* _list)
 {
 	Node<Combination>* currentNode = _list->getFirstNode();
-	for (int node = 0; node < LISTLENGTH; node++)
+	for (short node = 0; node < LISTLENGTH; node++)
 	{
 		tabCombinations[node] = currentNode->getContent();
 		currentNode = currentNode->getNext();
