@@ -8,17 +8,17 @@ Mastermind::Mastermind(LinkedList<Combination>* _list)
 	fillTab(_list);
 	list = _list;
 	//list->display();
-	for (int node = 0; node < LISTLENGTH; node++)
+	/*for (int node = 0; node < LISTLENGTH; node++)
 	{
 		tabCombinations[node]->display();
-	}
+	}*/
 }
 
 Mastermind::~Mastermind()
 {
-	for (int combi = 0; combi < LISTLENGTH; combi++)
+	for (int node = 0; node < LISTLENGTH; node++)
 	{
-		delete tabCombinations[combi];
+		delete tabCombinations[node];
 	}
 }
 
