@@ -61,14 +61,109 @@ namespace IteratorTest
 			delete j2;
 		}
 		
+		TEST_METHOD(Iterator_TestIncrementOperateurListeCinqNoeuds)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			Iterator<Book> iter = l.begin();
+			++iter;
+			++iter;
+			++iter;
+			IterAccess<Book> ia(iter);
+			Assert::IsTrue(ia.getCurrentNode()->getContent() == j4);
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+		}
 
-			
-		//Tester autres scénarios de ++ :
-		//   Sur liste vide
-		//   Plusieurs en séquence sur liste pleine
-		//   Fin de liste
+		TEST_METHOD(Iterator_TestIncrementOperateurListeDixNoeuds)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			Book* j6 = new Book(6);
+			Book* j7 = new Book(7);
+			Book* j8 = new Book(8);
+			Book* j9 = new Book(9);
+			Book* j10 = new Book(10);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			l.add(j6);
+			l.add(j7);
+			l.add(j8);
+			l.add(j9);
+			l.add(j10);
+			Iterator<Book> iter = l.begin();
+			++iter;
+			++iter;
+			++iter;
+			++iter;
+			++iter;
+			++iter;
+			++iter;
+			IterAccess<Book> ia(iter);
+			Assert::IsTrue(ia.getCurrentNode()->getContent() == j8);
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+			delete j6;
+			delete j7;
+			delete j8;
+			delete j9;
+			delete j10;
+		}
+
+		TEST_METHOD(Iterator_TestIncrementOperateurListeVide)
+		{
+			LinkedList<Book> l;
+			Iterator<Book> iter = l.begin();
+			Assert::IsTrue(iter==NULL);
+
+		}
+
+		//Non fonctionnel
+		/*TEST_METHOD(Iterator_TestIncrementOperateurFinListe)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			l.add(j1);
+			l.add(j2);
+			Iterator<Book> iter = l.begin();
+			++iter;
+			++iter;
+			++iter;
+			IterAccess<Book> ia(iter);
+			Assert::IsTrue(ia.getCurrentNode()==NULL);
+
+			delete j1;
+			delete j2;
+		}*/
+
+
+
+		//Tester tous les autres opérateurs de l'itérateur et ses cas limites !	
 		
-		//Tester tous les autres opérateurs de l'itérateur et ses cas limites !		
+
 	};
 }
 
