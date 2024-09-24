@@ -27,4 +27,5 @@ private:
 
     void generateList(LinkedList<Combination>* _list);
     void fillTab(LinkedList<Combination>* _list);
+    bool contains(Combination* _toValidate, Color _color, short _forbiddenIndex);
 };
