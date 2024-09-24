@@ -14,9 +14,9 @@ class Node
 		void setContent(T* _content);
 
 	private:
-		Node<T>* next;
-		Node<T>* previous;
-		T* content;
+		Node<T>* next = nullptr;
+		Node<T>* previous = nullptr;
+		T* content = nullptr;
 };
 
 template <class T>
