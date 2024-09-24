@@ -140,8 +140,7 @@ namespace IteratorTest
 
 		}
 
-		//Non fonctionnel
-		/*TEST_METHOD(Iterator_TestIncrementOperateurFinListe)
+		TEST_METHOD(Iterator_TestIncrementOperateurFinListe)
 		{
 			LinkedList<Book> l;
 			Book* j1 = new Book(1);
@@ -151,13 +150,12 @@ namespace IteratorTest
 			Iterator<Book> iter = l.begin();
 			++iter;
 			++iter;
-			++iter;
 			IterAccess<Book> ia(iter);
 			Assert::IsTrue(ia.getCurrentNode()==NULL);
 
 			delete j1;
 			delete j2;
-		}*/
+		}
 
 
 
