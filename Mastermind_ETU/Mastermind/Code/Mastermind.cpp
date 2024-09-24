@@ -45,7 +45,7 @@ Combination* Mastermind::getElement(int _index) const
 	return &iter;
 }
 
-bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts)
+bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts) const
 {
 	//A COMPLETER
 	//Vérifiez si la combinaison toValidate doit être gardée ou non de la liste, en fonction d'une combinaison essayée et d'un tableau de 4 verdicts.
@@ -154,7 +154,7 @@ void Mastermind::fillTab(LinkedList<Combination>* _list)
 	}
 }
 
-bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex)
+bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex) const
 {
 	Color colorValidate = NULL;
 
