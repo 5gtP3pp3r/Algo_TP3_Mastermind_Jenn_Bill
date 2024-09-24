@@ -111,18 +111,20 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 	//Cette fonction appelle isPossibleCombination pour savoir si la combinaison inspectée est à garder ou non
 
 	//TODO: Compléter
-
+	int removedCombinations = 0;
 	Iterator<Combination> iter = list->begin();
+
 	while (iter != nullptr)
 	{
 		if (!isPossibleCombination(&iter, _ref, _tabVerdicts))
 		{
 			list->remove(&iter);
+			removedCombinations++;
 		}
 		++iter;
 	}
 
-	return 0;
+	return removedCombinations;
 }
 
 void Mastermind::generateList(LinkedList<Combination>* _list)
