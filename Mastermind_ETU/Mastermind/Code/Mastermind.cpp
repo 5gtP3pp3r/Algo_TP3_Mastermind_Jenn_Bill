@@ -74,7 +74,7 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 	Color colorTried = NULL;
 	Color colorValidate = NULL;
 
-	for (int value = 0; value < VERDICTS_LENGTH; value++)
+	for (short value = 0; value < VERDICTS_LENGTH; value++)
 	{
 		colorTried = _tried->getColor(value);
 		colorValidate = _toValidate->getColor(value);
@@ -156,7 +156,7 @@ bool Mastermind::contains(Combination* _toValidate, Color _color, short _forbidd
 {
 	Color colorValidate = NULL;
 
-	for (int value = 0; value < VERDICTS_LENGTH; value++)
+	for (short value = 0; value < VERDICTS_LENGTH; value++)
 	{
 		colorValidate = _toValidate->getColor(value);
 
