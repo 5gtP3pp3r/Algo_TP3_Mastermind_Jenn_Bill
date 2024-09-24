@@ -71,10 +71,6 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 	_tried      (rouge, jaune, noir, mauve)
 	_tabVerdicts(  1  ,   3  ,   2 ,   3 )*/
 
-
-
-
-
 	Color colorTried = NULL;
 	Color colorValidate = NULL;
 
@@ -94,21 +90,14 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 				return false;
 			}			
 		}
-		if (_tabVerdicts[i] == 3 && colorTried == colorValidate)
+		if (_tabVerdicts[i] == 3)
 		{
-			return false;
+			if (contains(_toValidate, colorTried, i))
+			{
+				return false;
+			}
 		}
 	}
-
-
-
-
-
-
-
-
-
-
 	return true;
 }
 
