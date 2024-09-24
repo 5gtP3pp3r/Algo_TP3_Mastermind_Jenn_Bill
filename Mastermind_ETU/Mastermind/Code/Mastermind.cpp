@@ -85,14 +85,14 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 		}
 		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)
 		{
-			if (!contains(_toValidate, colorTried, value))
+			if (!containsColor(_toValidate, colorTried, value))
 			{
 				return false;
 			}			
 		}
 		if (_tabVerdicts[value] == 3)
 		{
-			if (contains(_toValidate, colorTried, value))
+			if (containsColor(_toValidate, colorTried, value))
 			{
 				return false;
 			}
@@ -152,7 +152,7 @@ void Mastermind::fillTab(LinkedList<Combination>* _list)
 	}
 }
 
-bool Mastermind::contains(Combination* _toValidate, Color _color, short _forbiddenIndex)
+bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex)
 {
 	Color colorValidate = NULL;
 
