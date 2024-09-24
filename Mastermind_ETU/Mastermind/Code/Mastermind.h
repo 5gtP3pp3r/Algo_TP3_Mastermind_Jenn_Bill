@@ -21,11 +21,11 @@ public:
 
 private:
 
-	bool isPossibleCombination(Combination* _toValidate, Combination* _ref, short* _tabVerdicts);
+	bool isPossibleCombination(Combination* _toValidate, Combination* _ref, short* _tabVerdicts) const;
     Combination* tabCombinations[NB_POSSIBLE_COMBINATIONS];
     LinkedList<Combination>* list; //Contient toutes les combinaisons de couleurs possibles, selon le contexte.
 
     void generateList(LinkedList<Combination>* _list);
     void fillTab(LinkedList<Combination>* _list);
-    bool contains(Combination* _toValidate, Color _color, short _forbiddenIndex);
+    bool containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex) const;
 };

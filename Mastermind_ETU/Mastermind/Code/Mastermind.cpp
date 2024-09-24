@@ -8,17 +8,17 @@ Mastermind::Mastermind(LinkedList<Combination>* _list)
 	fillTab(_list);
 	list = _list;
 	//list->display();
-	for (int i = 0; i < LISTLENGTH; i++)
+	/*for (int node = 0; node < LISTLENGTH; node++)
 	{
-		tabCombinations[i]->display();
-	}
+		tabCombinations[node]->display();
+	}*/
 }
 
 Mastermind::~Mastermind()
 {
-	for (int combi = 0; combi < LISTLENGTH; combi++)
+	for (short node = 0; node < LISTLENGTH; node++)
 	{
-		delete tabCombinations[combi];
+		delete tabCombinations[node];
 	}
 }
 
@@ -32,20 +32,20 @@ int Mastermind::getNbElements() const
 /// </summary>
 /// <param name="index">La position de l'élément à retourner</param>
 /// <returns>L'élément qui est à la position index</returns>
-Combination* Mastermind::getElement(int index) const
+Combination* Mastermind::getElement(int _index) const
 {
-	int i = 0;
+	short index = 0;
 	Iterator<Combination> iter = list->begin();
-	while (i < index)
+	while (index < _index)
 	{
 		++iter;
-		i++;
+		index++;
 	}
 
 	return &iter;
 }
 
-bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts)
+bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts) const
 {
 	//A COMPLETER
 	//Vérifiez si la combinaison toValidate doit être gardée ou non de la liste, en fonction d'une combinaison essayée et d'un tableau de 4 verdicts.
@@ -74,25 +74,25 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 	Color colorTried = NULL;
 	Color colorValidate = NULL;
 
-	for (int i = 0; i < VERDICTS_LENGTH; i++)
+	for (short value = 0; value < VERDICTS_LENGTH; value++)
 	{
-		colorTried = _tried->getColor(i);
-		colorValidate = _toValidate->getColor(i);
+		colorTried = _tried->getColor(value);
+		colorValidate = _toValidate->getColor(value);
 
-		if (_tabVerdicts[i] == 1 && colorTried != colorValidate) 
+		if (_tabVerdicts[value] == 1 && colorTried != colorValidate) 
 		{
 			return false;
 		}
-		if (_tabVerdicts[i] == 2 && colorTried != colorValidate)
+		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)
 		{
-			if (!contains(_toValidate, colorTried, i))
+			if (!containsColor(_toValidate, colorTried, value))
 			{
 				return false;
 			}			
 		}
-		if (_tabVerdicts[i] == 3)
+		if (_tabVerdicts[value] == 3)
 		{
-			if (contains(_toValidate, colorTried, i))
+			if (containsColor(_toValidate, colorTried, value))
 			{
 				return false;
 			}
@@ -111,18 +111,20 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 	//Cette fonction appelle isPossibleCombination pour savoir si la combinaison inspectée est à garder ou non
 
 	//TODO: Compléter
-
+	short removedCombinations = 0;
 	Iterator<Combination> iter = list->begin();
+
 	while (iter != nullptr)
 	{
 		if (!isPossibleCombination(&iter, _ref, _tabVerdicts))
 		{
 			list->remove(&iter);
+			removedCombinations++;
 		}
 		++iter;
 	}
 
-	return 0;
+	return removedCombinations;
 }
 
 void Mastermind::generateList(LinkedList<Combination>* _list)
@@ -145,22 +147,22 @@ void Mastermind::generateList(LinkedList<Combination>* _list)
 void Mastermind::fillTab(LinkedList<Combination>* _list)
 {
 	Node<Combination>* currentNode = _list->getFirstNode();
-	for (int i = 0; i < LISTLENGTH; i++)
+	for (short node = 0; node < LISTLENGTH; node++)
 	{
-		tabCombinations[i] = currentNode->getContent();
+		tabCombinations[node] = currentNode->getContent();
 		currentNode = currentNode->getNext();
 	}
 }
 
-bool Mastermind::contains(Combination* _toValidate, Color _color, short _forbiddenIndex)
+bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex) const
 {
 	Color colorValidate = NULL;
 
-	for (int i = 0; i < VERDICTS_LENGTH; i++)
+	for (short value = 0; value < VERDICTS_LENGTH; value++)
 	{
-		colorValidate = _toValidate->getColor(i);
+		colorValidate = _toValidate->getColor(value);
 
-		if (colorValidate == _color && i != _forbiddenIndex)
+		if (colorValidate == _color && value != _forbiddenIndex)
 		{
 			return true;
 		}
