@@ -147,7 +147,7 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 							incrémentation de l'itérateur dans getElement() (++iter) maintenant valeur 4
 													0   1   2  "3"  4
 								    le nouvel index 3, précédemment 4, a donc été ignoré.
-				      décrémentation de l'index (node--) pour reprendre à la bonne position dans la liste.
+				      décrémentation de l'index (node--) pour se remettre à la bonne position dans la liste.
 
 	La boucle se déplace donc "Back & Forth" lorsqu'il y a suppression et itère normalement lorsqu'il n'y a pas de suppression. Nous avons choisis cette 
 	logique car elle réutilise des ressources existantes et n'avons pas à déclaré 2 autres itérateurs pour une mécanique d'échange de valeurs suite à une 
