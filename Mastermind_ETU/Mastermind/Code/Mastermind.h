@@ -27,5 +27,5 @@ private:
 
     void generateList(LinkedList<Combination>* _list);
     void fillTab(LinkedList<Combination>* _list);
-    bool containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex, bool isCondition3) const;
+    bool containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex) const;
 };
