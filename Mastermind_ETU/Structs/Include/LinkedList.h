@@ -7,6 +7,11 @@
 #include <Iterator.h>
 using namespace std;
 
+										/*******************************************************
+										Les méthodes de LinkedList.h on été implémentées par les 
+										méthode du travail de William qui ont passées les tests.
+										*******************************************************/
+
 template <class T>
 class LinkedList : public DataStructure<T>
 {
@@ -42,6 +47,7 @@ LinkedList<T>::~LinkedList()
 template <class T>
 Iterator<T> LinkedList<T>::begin() const
 {
+	// retourne simplement le premier Node de la liste.
 	return Iterator<T>(this->getFirstNode());
 }
 
@@ -61,7 +67,7 @@ Iterator<T> LinkedList<T>::end() const
 	// Retourne la plage mémoire du next du dernier node, c'est null 
 	// (du garbage), mais c'est le bon spot APRÈS le dernier node.
 	// Mais c'est particulier... On ne peut pas simplement retourner un 
-	// Iterator<T> qui contient un pointeur à NULL?
+	// Iterator<T> qui contient un pointeur à NULL....
 	return Iterator<T>(currentNode);
 }
 

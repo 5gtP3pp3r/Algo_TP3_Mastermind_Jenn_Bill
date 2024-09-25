@@ -128,12 +128,12 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
    /******************************************* Explication de notre logique pour la méthode cleanList() ***************************************************************
 	
 	Notre premier jet impliquait une boucle while et la déclaration de 2 variables de type Iterator<Combination>. 
-	Nous utilisions un iterateur "b" pour conserver la valeur de l'itérateur "a" puisqu'on retirait la valeur de la 
-	liste. (l'iterateur "a" se retrouvait à pointer sur du "junk")
+	Nous utilisions un itérateur "b" pour conserver la valeur de l'itérateur "a" puisqu'on retirait la valeur de la 
+	liste. (l'itérateur "a" se retrouvait à pointer sur du "junk")
 	
 	Nous avons observé le code et remarqué que la méthode getElement() itère déjà dans la liste et que getNbElement() nous donne aussi la longueur
 	de la liste. Nous les avons donc mis à profit. De plus, une mécanique particulière s'est imposée : nous avons observé une situation où certaines combinaisons 
-	étaient ignorées lors des itérations. Cette situation nous a ammené à découpé, débogué et inspecté chaque itération pour constater un phénomène de sauts involontaires de
+	étaient ignorées lors des itérations. Cette situation nous a amené à découpé, débogué et inspecté chaque itération pour constater un phénomène de sauts involontaires de
 	combinaisons. 
 	Finalement, nous avons réglé le problème avec une décrémentation de l'index de la boucle (node) (si une combinaison est retirée de la liste). 
 	
