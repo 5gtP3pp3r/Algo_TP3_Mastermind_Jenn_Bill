@@ -79,20 +79,20 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 		colorTried = _tried->getColor(value);
 		colorValidate = _toValidate->getColor(value);
 
-		if (_tabVerdicts[value] == 1 && colorTried != colorValidate) 
+		if (_tabVerdicts[value] == 1 && colorTried != colorValidate)
 		{
 			return false;
 		}
 		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)
 		{
-			if (!containsColor(_toValidate, colorTried, value))
+			if (!containsColor(_toValidate, colorTried, value, false))
 			{
 				return false;
-			}			
+			}
 		}
 		if (_tabVerdicts[value] == 3)
 		{
-			if (containsColor(_toValidate, colorTried, value))
+			if (containsColor(_toValidate, colorTried, value, true))
 			{
 				return false;
 			}
@@ -113,15 +113,30 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 	//TODO: Compléter
 	short removedCombinations = 0;
 	Iterator<Combination> iter = list->begin();
+	Iterator<Combination> helpIter = list->begin();
+	bool gotRemoved = false;
 
 	while (iter != nullptr)
 	{
+		gotRemoved = false;
+		++helpIter;
 		if (!isPossibleCombination(&iter, _ref, _tabVerdicts))
 		{
+
 			list->remove(&iter);
 			removedCombinations++;
+			gotRemoved = true;
+
 		}
-		++iter;
+		if (gotRemoved)
+		{
+			iter = helpIter;
+		}
+		else
+		{
+			++iter;
+		}
+
 	}
 
 	return removedCombinations;
@@ -154,7 +169,7 @@ void Mastermind::fillTab(LinkedList<Combination>* _list)
 	}
 }
 
-bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex) const
+bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex, bool isCondition3) const
 {
 	Color colorValidate = NULL;
 
@@ -162,10 +177,15 @@ bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _fo
 	{
 		colorValidate = _toValidate->getColor(value);
 
+		if (colorValidate == _color && isCondition3)
+		{
+			return true;
+		}
 		if (colorValidate == _color && value != _forbiddenIndex)
 		{
 			return true;
 		}
+
 	}
 	return false;
 }
