@@ -8,7 +8,7 @@ Mastermind::Mastermind(LinkedList<Combination>* _list)
 	fillTab(_list);
 	list = _list;
 	//list->display();
-	/*for (int node = 0; node < LISTLENGTH; node++)
+	/*for (int node = 0; node < LISTLENGTH; node++)						// Test d'affichage liste chainée et tableau.
 	{
 		tabCombinations[node]->display();
 	}*/
@@ -60,40 +60,40 @@ Combination* Mastermind::getElement(int _index) const
 /// <returns> Retour booléen sur la validité des combinaisons de la liste. </returns>
 bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts) const
 {
-	Color colorTried = NULL;											// Déclaration de type couleur pour la combinaison 
-	Color colorValidate = NULL;											// _tried et chaque combinaisons de la liste.
+	Color colorTried = NULL;												// Déclaration de type couleur pour la combinaison 
+	Color colorValidate = NULL;												// _tried et chaque combinaisons de la liste.
 	bool isCondition3 = true;
 
-	for (short value = 0; value < VERDICTS_LENGTH; value++)				// Itération à la longueur de _tabVerdicts (4).
+	for (short value = 0; value < VERDICTS_LENGTH; value++)					// Itération à la longueur de _tabVerdicts (4).
 	{
-		colorTried = _tried->getColor(value);							// Attribution des valeurs des couleurs en relation 
-		colorValidate = _toValidate->getColor(value);					// avec les itérations du tableau _tabVerdicts.
+		colorTried = _tried->getColor(value);								// Attribution des valeurs des couleurs en relation 
+		colorValidate = _toValidate->getColor(value);						// avec les itérations du tableau _tabVerdicts.
 
-		if (_tabVerdicts[value] == 1 && colorTried != colorValidate)	// Si la qualité est 1 (bonne couleur, bonne position) et les couleurs sont
-		{																// différentes, la combinaison de la liste est invalide. Donc retirée dans cleanList().
+		if (_tabVerdicts[value] == 1 && colorTried != colorValidate)		// Si la qualité est 1 (bonne couleur, bonne position) et les couleurs sont
+		{																	// différentes, la combinaison de la liste est invalide. Donc retirée dans cleanList().
 			return false;
 		}
-		if (_tabVerdicts[value] == 2 && colorTried == colorValidate)	// Si la qualité est 2 (bonne couleur, mauvaise position) et les couleurs sont 
-		{																// identiques (au meme index), la combinaison de la liste est invalide. Donc retirée dans cleanList().
+		if (_tabVerdicts[value] == 2 && colorTried == colorValidate)		// Si la qualité est 2 (bonne couleur, mauvaise position) et les couleurs sont 
+		{																	// identiques (au meme index), la combinaison de la liste est invalide. Donc retirée dans cleanList().
 			return false;
 		}
-		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)	// Si la qualité est 2 (bonne couleur, mauvaise position), 
-		{																// et les couleurs sont différentes (au meme index),
-			if (!containsColor(_toValidate, colorTried, value))			// appel de la méthode containsColor, si la couleur
-			{															// n'est pas à un autre index, la combinaison de
-				return false;											// la liste est invalide. Donc retirée dans cleanList().
+		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)		// Si la qualité est 2 (bonne couleur, mauvaise position), 
+		{																	// et les couleurs sont différentes (au meme index),
+			if (!containsColorOnOtherIndex(_toValidate, colorTried, value))	// appel de la méthode containsColorOnOtherIndex(), si la couleur
+			{																// n'est pas à un autre index, la combinaison de
+				return false;												// la liste est invalide. Donc retirée dans cleanList().
 			}
 		}		
-		if (_tabVerdicts[value] == 3)									// Si la qualité est 3 (mauvaise couleur),
+		if (_tabVerdicts[value] == 3)										// Si la qualité est 3 (mauvaise couleur),
 		{
-			if (containsColor(_toValidate, colorTried, value))			// appel de la méthode containsColor, si la couleur
-			{															// est trouvée, la combinaison est invalide. 
-				return false;											// Donc retirée dans cleanList().
+			if (containsColor(_toValidate, colorTried))						// appel de la méthode containsColor, si la couleur
+			{																// est trouvée, la combinaison est invalide. 
+				return false;												// Donc retirée dans cleanList().
 			}
 		}
 	}
-	return true;														// Si aucune condition ne s'applique, la combinaison
-}																		// est bonne et restera dans la liste.
+	return true;															// Si aucune condition ne s'applique, la combinaison
+}																			// est bonne et restera dans la liste.
 
 /// <summary>
 /// Logique de retrait des combinaisons de la liste chainée. Itère la liste et envoi à la méthode
@@ -197,17 +197,26 @@ void Mastermind::fillTab(LinkedList<Combination>* _list)
 	}
 }
 
-/// <summary>
-/// Vérifie si une combinaison contient une couleur spécifiée
-/// </summary>
-/// <param name="_toValidate"> Combinaison à vérifier </param>
-/// <param name="_color"> Couleur à rechercher. </param>
-/// <param name="_forbiddenIndex"> Index présent dans la boucle cleanList(). </param>
-/// <returns> Booléen, est présent ou pas. </returns>
-bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex) const
-{
-	Color colorValidate = NULL;											// Exactement la même logique que la méthode Contains() en c#.
 
+								/********************************************************************************************
+								Les deux méthode suivantes ont une logique semblable, mais les avoir mis en une seule méthode
+								aurais amené le besoin d'un 4ième paramètre et séparer les 2 utilisations par un "if". Puisque
+								les 2 méthodes ont des paramètre différent et une légère différence dû à un index ignoré ou
+								pas, nous avons décidé de séparer le travail dans 2 méthodes (simple query responsibility).
+								********************************************************************************************/
+
+
+/// <summary>
+/// Vérifie si une combinaison contient une couleur précise, excepté à un index spécifié
+/// </summary>
+/// <param name="_toValidate"> Combinaison à vérifier. </param>
+/// <param name="_color"> Couleur à rechercher. </param>
+/// <param name="_forbiddenIndex"> Index spécifié dans la boucle cleanList(). </param>
+/// <returns> Booléen, est présent ou pas. </returns>
+bool Mastermind::containsColorOnOtherIndex(Combination* _toValidate, Color _color, short _forbiddenIndex) const
+{
+	Color colorValidate = NULL;												// Semblable à la même logique que la méthode Contains() en c#, mais
+																			// ne regarde pas la valeur à l'index présent qui devient "interdit"
 	for (short value = 0; value < VERDICTS_LENGTH; value++)
 	{
 		colorValidate = _toValidate->getColor(value);
@@ -217,5 +226,28 @@ bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _fo
 			return true;
 		}
 	}
+	return false;
+}
+
+/// <summary>
+/// Vérifie si une combinaison contient une couleur précise
+/// </summary>
+/// <param name="_toValidate"> Combinaison à vérifier. </param>
+/// <param name="_color"> Couleur à rechercher. </param>
+/// <returns> Booléen, est présent ou pas. </returns>
+bool Mastermind::containsColor(Combination* _toValidate, Color _color) const
+{
+	Color colorValidate = NULL;												// Exactement la même logique que la méthode Contains() en c#.
+
+	for (short value = 0; value < VERDICTS_LENGTH; value++)
+	{
+		colorValidate = _toValidate->getColor(value);
+
+		if (colorValidate == _color)
+		{
+			return true;
+		}
+	}
+
 	return false;
 }
