@@ -112,31 +112,18 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 
 	//TODO: Compléter
 	short removedCombinations = 0;
-	Iterator<Combination> iter = list->begin();
-	Iterator<Combination> helpIter = list->begin();
-	bool gotRemoved = false;
+	short listLength = this->getNbElements();
 
-	while (iter != nullptr)
+	for (short node = 0; node < listLength; node++)
 	{
-		gotRemoved = false;
-		++helpIter;
-		if (!isPossibleCombination(&iter, _ref, _tabVerdicts))
+		Combination* combToValidate = this->getElement(node);
+		if (!isPossibleCombination(combToValidate, _ref, _tabVerdicts))
 		{
-
-			list->remove(&iter);
+			list->remove(combToValidate);
+			listLength--;
 			removedCombinations++;
-			gotRemoved = true;
-
+			node--;
 		}
-		if (gotRemoved)
-		{
-			iter = helpIter;
-		}
-		else
-		{
-			++iter;
-		}
-
 	}
 
 	return removedCombinations;
