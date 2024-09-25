@@ -112,13 +112,13 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 
 	for (short node = 0; node < listLength; node++)						// Itération à la longueur de la liste
 	{
-		combToValidate = this->getElement(node);
+		combToValidate = this->getElement(node);						// Attribution de la valeur de la combinaison présente.
 		if (!isPossibleCombination(combToValidate, _ref, _tabVerdicts))	// Appel de la méthode isPossibleCombination avec les paramètres pertinents.
 		{
 			list->remove(combToValidate);								// Si la combinaison est invalide, on retire la combinaison de la liste,
 			listLength--;												// décrémente de 1 la longueur de la boucle puisqu'on a retirée une combinaison,
 			removedCombinations++;										// incrémente de 1 le nombre de combinaisons retirées
-			node--;														// et, particulier, décrémente de 1 l'index de la boucle
+			node--;														// et, particulier, décrémente de 1 l'index de la boucle **voir commentaire plus bas**
 		}                                                               // pour se repositionner et donc éviter de passer au dessus d'un noeud.
 	}
 
