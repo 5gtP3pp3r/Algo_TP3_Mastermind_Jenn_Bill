@@ -50,6 +50,7 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 {
 	Color colorTried = NULL;
 	Color colorValidate = NULL;
+	bool isCondition3 = true;
 
 	for (short value = 0; value < VERDICTS_LENGTH; value++)
 	{
@@ -62,14 +63,14 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 		}
 		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)
 		{
-			if (!containsColor(_toValidate, colorTried, value, false))
+			if (!containsColor(_toValidate, colorTried, value, !isCondition3))
 			{
 				return false;
 			}
 		}
 		if (_tabVerdicts[value] == 3)
 		{
-			if (containsColor(_toValidate, colorTried, value, true))
+			if (containsColor(_toValidate, colorTried, value, isCondition3))
 			{
 				return false;
 			}
@@ -134,14 +135,15 @@ bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _fo
 	{
 		colorValidate = _toValidate->getColor(value);
 
+		if (colorValidate == _color && value != _forbiddenIndex && !isCondition3)
+		{
+			return true;
+		}
 		if (colorValidate == _color && isCondition3)
 		{
 			return true;
 		}
-		if (colorValidate == _color && value != _forbiddenIndex)
-		{
-			return true;
-		}
+		
 	}
 	return false;
 }
