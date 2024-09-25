@@ -36,6 +36,7 @@ Combination* Mastermind::getElement(int _index) const
 {
 	short index = 0;
 	Iterator<Combination> iter = list->begin();
+
 	while (index < _index)
 	{
 		++iter;
@@ -47,30 +48,6 @@ Combination* Mastermind::getElement(int _index) const
 
 bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _tried, short* _tabVerdicts) const
 {
-	//A COMPLETER
-	//Vérifiez si la combinaison toValidate doit être gardée ou non de la liste, en fonction d'une combinaison essayée et d'un tableau de 4 verdicts.
-	//Pour chacune des couleurs présentes dans toValidate, 3 verdicts possibles doivent être pris en considération pour éliminer ou non la combinaison, 
-	//il s'agit de "Bonne couleur, bonne place" (valeur 1), "Bonne couleur, mauvaise place" (valeur 2) et "Mauvaise couleur" (valeur 3).
-
-	//Voici un ébauche d'algorithme qui devrait vous aider à compléter cette méthode:
-	//Pour chacune des couleurs de la combinaison toValidate, vérifiez:
-
-	//Si le verdict est 1 (Bonne couleur, bonne place) et que la combinaison de couleurs à valider n'a pas la couleur à la même place que 
-	//la combinaison essayée, il faut la retirer de la liste.
-
-	//Si le verdict est 2 (Bonne couleur, mauvaise place) et que la combinaison de couleurs à valider n'a pas la couleur à un autre emplacement que
-	//celui de la combinaison essayée, il faut la retirer de la liste.
-
-	//Si le verdict est 3 (Mauvaise couleur) et que la combinaison de couleurs à valider a la couleur, il faut la retirer de la liste.
-
-	//Retournez true si la combinaison est valide (respecte les verdicts) et false dans le cas contraire.
-
-	/*bonneComb   (rouge, noir ,jaune , vert)
-	_toValidate [Rouge, Rouge, Rouge, Vert]
-
-	_tried      (rouge, jaune, noir, mauve)
-	_tabVerdicts(  1  ,   3  ,   2 ,   3 )*/
-
 	Color colorTried = NULL;
 	Color colorValidate = NULL;
 
@@ -103,14 +80,6 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 
 int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 {
-	//A COMPLETER
-	//Épure la liste de combinaisons de couleurs en fonction de la combinaison reçue et des 4 verdicts (valeurs 1 à 3).
-	//Pour chacune des combinaisons de la liste, vérifier si elle doit être retirée ou non de liste.
-	//Le nombre de combinaisons supprimées doit être retourné.
-
-	//Cette fonction appelle isPossibleCombination pour savoir si la combinaison inspectée est à garder ou non
-
-	//TODO: Compléter
 	short removedCombinations = 0;
 	short listLength = this->getNbElements();
 
@@ -149,6 +118,7 @@ void Mastermind::generateList(LinkedList<Combination>* _list)
 void Mastermind::fillTab(LinkedList<Combination>* _list)
 {
 	Node<Combination>* currentNode = _list->getFirstNode();
+
 	for (short node = 0; node < LISTLENGTH; node++)
 	{
 		tabCombinations[node] = currentNode->getContent();
@@ -172,7 +142,6 @@ bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _fo
 		{
 			return true;
 		}
-
 	}
 	return false;
 }
