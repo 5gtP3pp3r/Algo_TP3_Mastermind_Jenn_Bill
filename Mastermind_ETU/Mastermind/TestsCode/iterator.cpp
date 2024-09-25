@@ -140,7 +140,6 @@ namespace IteratorTest
 
 		}
 
-		//Non fonctionnel
 		TEST_METHOD(Iterator_TestIncrementOperateurFinListe)
 		{
 			LinkedList<Book> l;
@@ -151,7 +150,6 @@ namespace IteratorTest
 			Iterator<Book> iter = l.begin();
 			++iter;
 			++iter;
-			//++iter;
 			IterAccess<Book> ia(iter);
 			Assert::IsTrue(ia.getCurrentNode()==NULL);
 
