@@ -106,42 +106,81 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 /// <returns> nombre de combinaisons retirées. </returns>
 int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 {
-	short removedCombinations = 0;
-	short listLength = this->getNbElements();
-	Combination* combToValidate = NULL;
+	short removedCombinations = 0;										// Déclaration d'une variable qui sera incrémenté au besoin.
+	short listLength = this->getNbElements();							// Déclaration d'une variable qui va conserver la longueur de la liste.
+	Combination* combToValidate = NULL;									// Déclaration d'un type pointeur de Combination.
 
-	for (short node = 0; node < listLength; node++)
+	for (short node = 0; node < listLength; node++)						// Itération à la longueur de la liste
 	{
 		combToValidate = this->getElement(node);
-		if (!isPossibleCombination(combToValidate, _ref, _tabVerdicts))
+		if (!isPossibleCombination(combToValidate, _ref, _tabVerdicts))	// Appel de la méthode isPossibleCombination avec les paramètres pertinents.
 		{
-			list->remove(combToValidate);
-			listLength--;
-			removedCombinations++;
-			node--;
+			list->remove(combToValidate);								// Si la condition est fausse, on retire la combinaison de la liste,
+			listLength--;												// décrémentation de la longueur de la boucle,
+			removedCombinations++;										// incrémentation de la variable représentant le nombre de combinaisons retirées
+			node--;														// et, particulier, décrémentation de l'index de la boucle.
 		}
 	}
 
-	return removedCombinations;
+	return removedCombinations;											// Retour du nombre de combinaisons retirées.
+
+
+   /****************************************************************************************************************************************************
+	Explications de notre logique pour la méthode cleanList(). Notre premier jet impliquait une boucle while et la déclaration de 2 variable de type 
+	Iterator<Combination>. nous utilisions dons les 2 itérateur pour pour pouvoir conserver la valeur de l'itérateur même si on retire sa valeur de la 
+	list. Nous avons observé le code et remarqué que la méthode getElement() itère déjà dans la liste et que getNbElement() nous donne aussi la longueur
+	de la liste. nous les avons donc mis à profit. Une mécanique particulière c'est imposé et nous avons observé une situations où certaine combinaisons 
+	étaient ignorées lors des itérations. Nous avons donc découpé, débogué et inspecter chaque itération pour voir un phénomène de saut involontaire de
+	combinaison. Nous avons donc réglé le problème avec une décrémentation de l'index de la boucle (node) seulement si une combinaison est retiré de la
+	liste. Voici donc une représentation graphique de la raison de l'utilisation de la décrémentation:
+	
+	Voici une liste de 7 index:						0   1   2   3   4   5   6
+
+	Lorsqu'un index est retiré nous décrémentons la longueur de la liste puisque nous utilisons getElement() qui redéfini un itérateur sur une liste qui  
+	a été raccourcie.
+													0   1   2   3   4   5 
+
+	Mais une situation spécial s'observe:		    index retiré, valeur 3
+													0   1   2   *   4   5
+													liste raccourcie de 1
+													0   1   2  <-3(4) <-4(5)
+							incrémentation de l'itérateur dans getElement() (++iter) maintenant valeur 4
+													0   1   2  "3"  4
+								    le nouvel index 3, précédemment 4, a donc été ignoré.
+				      décrémentation de l'index (node--) pour reprendre à la bonne position dans la liste.
+
+	La boucle se déplace donc "Back & Forth" lorsqu'il y a suppression et itère normalement lorsqu'il n'y a pas de suppression. Nous avons choisis cette 
+	logique car elle réutilise des ressources existantes et n'avons pas à déclaré 2 autres itérateurs pour une mécanique d'échange de valeurs suite à une 
+	suppression. La méthode est donc environ 3 fois plus courte, très concise et verbeuse. Elle peut être lue et comprise comme un texte.
+    ****************************************************************************************************************************************************/
 }
 
+/// <summary>
+/// Génération de la liste chainées de combinaisons
+/// </summary>
+/// <param name="_list"> Liste déclaré dans ConsoleMenu mais vide, seulement instanciée. </param>
 void Mastermind::generateList(LinkedList<Combination>* _list)
 {
-	for (short c1 = 1; c1 < NB_COLORS + 1; c1++)
+	for (short c1 = 1; c1 < NB_COLORS + 1; c1++)						// Puissance "3". Une boucle par "puissance" de la combinaison.  
 	{
-		for (short c2 = 1; c2 < NB_COLORS + 1; c2++)
+		for (short c2 = 1; c2 < NB_COLORS + 1; c2++)					// Puissance "2"
 		{
-			for (short c3 = 1; c3 < NB_COLORS + 1; c3++)
+			for (short c3 = 1; c3 < NB_COLORS + 1; c3++)				// Puissance "1"
 			{
-				for (short c4 = 1; c4 < NB_COLORS + 1; c4++)
+				for (short c4 = 1; c4 < NB_COLORS + 1; c4++)			// Puissance "0"
 				{
-					_list->add(new Combination(Color(c1), Color(c2), Color(c3), Color(c4)));
-				}
+					_list->add(new Combination(Color(c1), Color(c2), Color(c3), Color(c4)));	// déclaration et ajout d'une combinaison de 4 couleurs
+				}																				// en relation avec la position des boucles.
 			}
 		}
 	}
 }
 
+/// <summary>
+/// Ajout des combinaison de la liste dans le tableau prévue pour conserver
+/// les adresse pour permettre leur suppression dans le destructeur.
+/// </summary>
+/// <param name="_list"> Liste nouvellement créé. </param>
 void Mastermind::fillTab(LinkedList<Combination>* _list)
 {
 	Node<Combination>* currentNode = _list->getFirstNode();
@@ -153,9 +192,16 @@ void Mastermind::fillTab(LinkedList<Combination>* _list)
 	}
 }
 
+/// <summary>
+/// Vérifie si une combinaison contient une couleur spécifiée
+/// </summary>
+/// <param name="_toValidate"> Combinaison à vérifier </param>
+/// <param name="_color"> Couleur à rechercher. </param>
+/// <param name="_forbiddenIndex"> Index présent dans la boucle cleanList(). </param>
+/// <returns> Booléen, est présent ou pas. </returns>
 bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex) const
 {
-	Color colorValidate = NULL;
+	Color colorValidate = NULL;											// Exactement la même logique que la méthode Contains() en c#.
 
 	for (short value = 0; value < VERDICTS_LENGTH; value++)
 	{
