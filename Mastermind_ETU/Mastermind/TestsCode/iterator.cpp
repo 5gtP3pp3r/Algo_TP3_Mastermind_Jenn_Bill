@@ -45,8 +45,16 @@ namespace IteratorTest
 		}
 		
 
-		//Test du ++
-		TEST_METHOD(Iterator_TestIncrementOperateurListeDeuxNoeud)
+		//------------------------- Operator ++ -------------------------------------
+		TEST_METHOD(TestOperatorIncrement_EmptyList_IsNull)
+		{
+			LinkedList<Book> l;
+			Iterator<Book> iter = l.begin();
+			Assert::IsTrue(iter==NULL);
+
+		}
+		//----------- Returns True -------------
+		TEST_METHOD(TestOperatorIncrement_2NodesList_ReturnsTrue)
 		{
 			LinkedList<Book> l;
 			Book* j1 = new Book(1);
@@ -61,7 +69,7 @@ namespace IteratorTest
 			delete j2;
 		}
 		
-		TEST_METHOD(Iterator_TestIncrementOperateurListeCinqNoeuds)
+		TEST_METHOD(TestOperatorIncrement_5NodesList_ReturnsTrue)
 		{
 			LinkedList<Book> l;
 			Book* j1 = new Book(1);
@@ -87,7 +95,7 @@ namespace IteratorTest
 			delete j5;
 		}
 
-		TEST_METHOD(Iterator_TestIncrementOperateurListeDixNoeuds)
+		TEST_METHOD(TestOperatorIncrement_10NodesList_ReturnsTrue)
 		{
 			LinkedList<Book> l;
 			Book* j1 = new Book(1);
@@ -132,15 +140,95 @@ namespace IteratorTest
 			delete j10;
 		}
 
-		TEST_METHOD(Iterator_TestIncrementOperateurListeVide)
+		//----------- Returns False -------------
+
+		TEST_METHOD(TestOperatorIncrement_2NodesList_ReturnsFalse)
 		{
 			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			l.add(j1);
+			l.add(j2);
 			Iterator<Book> iter = l.begin();
-			Assert::IsTrue(iter==NULL);
-
+			++iter;
+			IterAccess<Book> ia(iter);
+			Assert::IsFalse(ia.getCurrentNode()->getContent() == j1);
+			delete j1;
+			delete j2;
 		}
 
-		TEST_METHOD(Iterator_TestIncrementOperateurFinListe2Noeuds)
+		TEST_METHOD(TestOperatorIncrement_5NodesList_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			Iterator<Book> iter = l.begin();
+			++iter;
+			++iter;
+			++iter;
+			IterAccess<Book> ia(iter);
+			Assert::IsFalse(ia.getCurrentNode()->getContent() == j2);
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+		}
+
+		TEST_METHOD(TestOperatorIncrement_10NodesList_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			Book* j6 = new Book(6);
+			Book* j7 = new Book(7);
+			Book* j8 = new Book(8);
+			Book* j9 = new Book(9);
+			Book* j10 = new Book(10);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			l.add(j6);
+			l.add(j7);
+			l.add(j8);
+			l.add(j9);
+			l.add(j10);
+			Iterator<Book> iter = l.begin();
+			++iter;
+			++iter;
+			++iter;
+			++iter;
+			++iter;
+			++iter;
+			++iter;
+			IterAccess<Book> ia(iter);
+			Assert::IsFalse(ia.getCurrentNode()->getContent() == j6);
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+			delete j6;
+			delete j7;
+			delete j8;
+			delete j9;
+			delete j10;
+		}
+		//--------- End list is null ---------
+		TEST_METHOD(TestOperatorIncrement_EndList_2Nodes)
 		{
 			LinkedList<Book> l;
 			Book* j1 = new Book(1);
@@ -157,7 +245,7 @@ namespace IteratorTest
 			delete j2;
 		}
 
-		TEST_METHOD(Iterator_TestIncrementOperateurFinListeCinqNoeuds)
+		TEST_METHOD(TestOperatorIncrement_EndList_5Nodes)
 		{
 			LinkedList<Book> l;
 			Book* j1 = new Book(1);
@@ -185,7 +273,7 @@ namespace IteratorTest
 			delete j5;
 		}
 
-		TEST_METHOD(Iterator_TestIncrementOperateurFinListeDixNoeuds)
+		TEST_METHOD(TestOperatorIncrement_EndList_10Nodes)
 		{
 			LinkedList<Book> l;
 			Book* j1 = new Book(1);
@@ -233,25 +321,339 @@ namespace IteratorTest
 			delete j10;
 		}
 
-		//non fonctionnel
-		////Tester tous les autres opérateurs de l'itérateur et ses cas limites !	
-		//TEST_METHOD(Iterator_TestEqualsOperateurListeDeuxNoeud)
-		//{
-		//	LinkedList<Book> l;
-		//	Book* j1 = new Book(1);
-		//	Book* j2 = new Book(2);
-		//	l.add(j1);
-		//	l.add(j2);
-		//	Iterator<Book> iter1 = l.begin();
-		//	Iterator<Book> iter2 = l.begin();
-		//	++iter1;
-		//	++iter2;
-		//	IterAccess<Book> ia1(iter1);
-		//	IterAccess<Book> ia2(iter2);
-		//	Assert::IsTrue(ia1 ==ia2 );
-		//	delete j1;
-		//	delete j2;
-		//}
+
+		//------------------------- Operator == -------------------------------------
+		/*Non fonctionnel
+		TEST_METHOD(TestOperatorEquals_EmptyList_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsFalse(ia1.getCurrentNode() == ia2.getCurrentNode());
+		}*/
+
+		//--------- Returns True ---------
+		TEST_METHOD(TestOperatorEquals_2NodesList_ReturnsTrue)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			l.add(j1);
+			l.add(j2);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			++iter2;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsTrue(ia1.getCurrentNode() == ia2.getCurrentNode());
+			delete j1;
+			delete j2;
+		}
+
+		TEST_METHOD(TestOperatorEquals_5NodesList_ReturnsTrue)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter2;
+			++iter2;
+			++iter2;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsTrue(ia1.getCurrentNode() ==ia2.getCurrentNode());
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+		}
+
+		TEST_METHOD(TestOperatorEquals_10NodesList_ReturnsTrue)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			Book* j6 = new Book(6);
+			Book* j7 = new Book(7);
+			Book* j8 = new Book(8);
+			Book* j9 = new Book(9);
+			Book* j10 = new Book(10);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			l.add(j6);
+			l.add(j7);
+			l.add(j8);
+			l.add(j9);
+			l.add(j10);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsTrue(ia1.getCurrentNode() == ia2.getCurrentNode());
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+			delete j6;
+			delete j7;
+			delete j8;
+			delete j9;
+			delete j10;
+		}
+
+		//--------- Returns False ---------
+		TEST_METHOD(TestOperatorEquals_2NodesList_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			l.add(j1);
+			l.add(j2);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsFalse(ia1.getCurrentNode() == ia2.getCurrentNode());
+			delete j1;
+			delete j2;
+		}
+
+		TEST_METHOD(TestOperatorEquals_5NodesList_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			++iter1;
+			++iter2;
+			++iter2;
+			++iter2;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsFalse(ia1.getCurrentNode() == ia2.getCurrentNode());
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+		}
+
+		TEST_METHOD(TestOperatorEquals_10NodesList_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			Book* j6 = new Book(6);
+			Book* j7 = new Book(7);
+			Book* j8 = new Book(8);
+			Book* j9 = new Book(9);
+			Book* j10 = new Book(10);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			l.add(j6);
+			l.add(j7);
+			l.add(j8);
+			l.add(j9);
+			l.add(j10);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsFalse(ia1.getCurrentNode() == ia2.getCurrentNode());
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+			delete j6;
+			delete j7;
+			delete j8;
+			delete j9;
+			delete j10;
+		}
+
+		//--------- End list returns False ---------
+		/*Non fonctionnel
+		TEST_METHOD(TestOperatorEquals_EndList_2Nodes_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			l.add(j1);
+			l.add(j2);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			++iter1;
+			++iter2;
+			++iter2;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsFalse(ia1.getCurrentNode() == ia2.getCurrentNode());
+
+			delete j1;
+			delete j2;
+		}
+
+		TEST_METHOD(TestOperatorEquals_EndList_5Nodes_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsFalse(ia1.getCurrentNode() == ia2.getCurrentNode());
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+		}
+
+		TEST_METHOD(TestOperatorEquals_EndList_10Nodes_ReturnsFalse)
+		{
+			LinkedList<Book> l;
+			Book* j1 = new Book(1);
+			Book* j2 = new Book(2);
+			Book* j3 = new Book(3);
+			Book* j4 = new Book(4);
+			Book* j5 = new Book(5);
+			Book* j6 = new Book(6);
+			Book* j7 = new Book(7);
+			Book* j8 = new Book(8);
+			Book* j9 = new Book(9);
+			Book* j10 = new Book(10);
+			l.add(j1);
+			l.add(j2);
+			l.add(j3);
+			l.add(j4);
+			l.add(j5);
+			l.add(j6);
+			l.add(j7);
+			l.add(j8);
+			l.add(j9);
+			l.add(j10);
+			Iterator<Book> iter1 = l.begin();
+			Iterator<Book> iter2 = l.begin();
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter1;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			++iter2;
+			IterAccess<Book> ia1(iter1);
+			IterAccess<Book> ia2(iter2);
+			Assert::IsFalse(ia1.getCurrentNode() == ia2.getCurrentNode());
+			delete j1;
+			delete j2;
+			delete j3;
+			delete j4;
+			delete j5;
+			delete j6;
+			delete j7;
+			delete j8;
+			delete j9;
+			delete j10;
+		}*/
 
 	};
 }
