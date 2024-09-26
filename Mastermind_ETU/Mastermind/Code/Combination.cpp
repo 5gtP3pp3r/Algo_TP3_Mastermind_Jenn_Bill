@@ -4,13 +4,13 @@
 
 Combination::Combination(Color c1, Color c2, Color c3, Color c4)
 
-/******************************************************************************************************************
-*Cette surcharge d'opérateur a été implémenté simplement pour le plaisir de bien monter la liste chainée selon    *
-*la logique qu'elle doit utiliser. Soit la comparaison < et > pour l'insertion des objets à la bonne positions.   *
-*N'est pas nécessaire à la complétion du TP3 Mastermind car les combinaisons ne sont pas comparées avec leur      *
-*valeur numérique. La composition des surcharges est simplement un plaisir personnel pour voir les bons résultats.*
-*Surcharges composé par William.
-******************************************************************************************************************/
+					/******************************************************************************************************************
+					*Cette surcharge d'opérateur a été implémenté simplement pour le plaisir de bien monter la liste chainée selon    *
+					*la logique qu'elle doit utiliser. Soit la comparaison < et > pour l'insertion des objets à la bonne positions.   *
+					*N'est pas nécessaire à la complétion du TP3 Mastermind car les combinaisons ne sont pas comparées avec leur      *
+					*valeur numérique. La composition des surcharges est simplement un plaisir personnel pour voir les bons résultats.*
+					*Surcharges composées par William.
+					******************************************************************************************************************/
 {
 	tabColors[0] = c1;
 	tabColors[1] = c2;
@@ -39,12 +39,12 @@ bool Combination::operator < (const Combination& _combination) const
 {																					// Déclaration leftHand représente "this" ou 
 	int leftHand = 0;																// Déclaration rightHand
 	int rightHand = 0;																// la combinaison de gauche dans une équation.
-	int multiplier = 1000;															// Déclaration d'une "puissance". La valeur d'une combinaison
-	for (short color = 0; color < COMBINATION_LENGTH; color++)						// sera comparable à un nombre de 3 puissances (3, 2, 1, 0)	
+	int power = 1000;																// Déclaration d'une "puissance". La valeur d'une combinaison
+	for (short color = 0; color < COMBINATION_LENGTH; color++)						// sera comparable à un nombre de 4 puissances (3, 2, 1, 0)	
 	{
-		leftHand += this->tabColors[color].convertToNumeric() * multiplier;
-		rightHand += _combination.tabColors[color].convertToNumeric() * multiplier;	// Conversion de la couleur de l'index présent en sa valeur numérique
-		multiplier /= 10;															// Division de la puissance pour changer la valeur de la couleur
+		leftHand += this->tabColors[color].convertToNumeric() * power;
+		rightHand += _combination.tabColors[color].convertToNumeric() * power;		// Conversion de la couleur de l'index présent en sa valeur numérique
+		power /= 10;																// Division de la puissance pour changer de position la valeur numérique
 	}																				// dans la combinaison exemple: rouge, rouge, rouge, rouge = 1111.
 
 	return leftHand < rightHand;
@@ -93,7 +93,7 @@ bool Combination::operator != (const Combination& _combination) const
 void Combination::display() const
 {
 	cout << "[" << tabColors[0] << ", "												// Redéfinition de display pour un teste d'affichage
-		<< tabColors[1] << ", "														// des combinaison de la liste plus lisible.
+		<< tabColors[1] << ", "														// des combinaisons de la liste plus lisible.
 		<< tabColors[2] << ", "
 		<< tabColors[3] << "]" << endl;
 	/*cout << tabColors[0] << endl;
