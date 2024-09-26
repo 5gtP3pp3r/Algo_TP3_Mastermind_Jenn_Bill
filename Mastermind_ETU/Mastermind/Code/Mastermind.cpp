@@ -235,7 +235,7 @@ bool Mastermind::containsColorOnOtherIndex(Combination* _toValidate, Color _colo
 /// <param name="_toValidate"> Combinaison à vérifier. </param>
 /// <param name="_color"> Couleur à rechercher. </param>
 /// <returns> Booléen, est présent ou pas. </returns>
-bool Mastermind::containsColorWithForbiddenIndex(Combination* _toValidate, Color _color, short _forbiddenIndex) const
+bool Mastermind::containsColorOnOtherIndex(Combination* _toValidate, Color _color, short _forbiddenIndex) const
 {
 	Color colorValidate = NULL;											// La logique est semblable a Contains() en c#,
 	                                                                    // mais on ajoute un index interdit pour le verdict 2.
