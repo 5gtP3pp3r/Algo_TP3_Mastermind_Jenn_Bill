@@ -199,7 +199,7 @@ void Mastermind::fillTab(LinkedList<Combination>* _list)
 
 
 								/********************************************************************************************
-								Les deux méthode suivantes ont une logique semblable, mais les avoir mis en une seule méthode
+								Les deux méthodes suivantes ont une logique semblable, mais les avoir mis en une seule méthode
 								aurais amené le besoin d'un 4ième paramètre et séparer les 2 utilisations par un "if". Puisque
 								les 2 méthodes ont des paramètre différent et une légère différence dû à un index ignoré ou
 								pas, nous avons décidé de séparer le travail dans 2 méthodes (simple query responsibility).
