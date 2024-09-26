@@ -7,12 +7,12 @@
 
 ConsoleMenu::ConsoleMenu()
 {
-
+    ;
 }
 
 ConsoleMenu::~ConsoleMenu()
 {
-
+    ;
 }
 
 /// <summary>
