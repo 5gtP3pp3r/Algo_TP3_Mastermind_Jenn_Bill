@@ -9,14 +9,14 @@ Mastermind::Mastermind(LinkedList<Combination>* _list)
 													* si précisé autrement. (tests, surcharge Combinaison)*
 													******************************************************/
 {
-	generateList(_list);
-	fillTab(_list);
+	generateList(_list);	
 	list = _list;
+	fillTab();
 	//list->display();
-	/*for (int node = 0; node < LISTLENGTH; node++)						// Test d'affichage liste chainée et tableau.
+	for (int node = 0; node < LISTLENGTH; node++)						// Test d'affichage liste chainée et tableau.
 	{
 		tabCombinations[node]->display();
-	}*/
+	}
 }
 
 Mastermind::~Mastermind()
@@ -79,11 +79,11 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 			return false;
 		}
 		if (_tabVerdicts[value] == 2 && colorTried == colorValidate)		// Si la qualité est 2 (bonne couleur, mauvaise position) et les couleurs sont 
-		{																	// identiques (au meme index), la combinaison de la liste est invalide. Donc retirée dans cleanList().
+		{																	// identiques au meme index, la combinaison de la liste est invalide. Donc retirée dans cleanList().
 			return false;
 		}
 		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)		// Si la qualité est 2 (bonne couleur, mauvaise position), 
-		{																	// et les couleurs sont différentes (au meme index),
+		{																	// et que les couleurs sont différentes au meme index,
 			if (!containsColorOnOtherIndex(_toValidate, colorTried, value))	// appel de la méthode containsColorOnOtherIndex(), si la couleur
 			{																// n'est pas à un autre index, la combinaison de
 				return false;												// la liste est invalide. Donc retirée dans cleanList().
@@ -112,7 +112,7 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 {
 	short removedCombinations = 0;										// Déclaration d'une variable pour retourner le nombre de combinaison retirées.
-	short listLength = this->getNbElements();							// Déclaration d'une variable qui contient la longueur de la liste.
+	short listLength = LISTLENGTH;										// Déclaration d'une variable qui contient la longueur de la liste à l'origine.
 	Combination* combToValidate = NULL;									// Déclaration d'un type pointeur de Combination.
 
 	for (short node = 0; node < listLength; node++)						// Itération à la longueur de la liste
@@ -123,7 +123,7 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 			list->remove(combToValidate);								// Si la combinaison est invalide, on retire la combinaison de la liste,
 			listLength--;												// décrémente de 1 la longueur de la boucle puisqu'on a retirée une combinaison,
 			removedCombinations++;										// incrémente de 1 le nombre de combinaisons retirées
-			node--;														// et, particulier, décrémente de 1 l'index de la boucle **voir commentaire plus bas**
+			node--;														// et, particulier, décrémente de 1 l'index de la boucle     !** voir commentaire plus bas ligne 133 **!
 		}                                                               // pour se repositionner et donc éviter de passer au dessus d'un noeud.
 	}
 
@@ -136,11 +136,10 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 	Nous utilisions un itérateur "b" pour conserver la valeur de l'itérateur "a" puisqu'on retirait la valeur de la 
 	liste. (l'itérateur "a" se retrouvait à pointer sur du "junk")
 	
-	Nous avons observé le code et remarqué que la méthode getElement() itère déjà dans la liste et que getNbElement() nous donne aussi la longueur
-	de la liste. Nous les avons donc mis à profit. De plus, une mécanique particulière s'est imposée : nous avons observé une situation où certaines combinaisons 
-	étaient ignorées lors des itérations. Cette situation nous a amené à découpé, débogué et inspecté chaque itération pour constater un phénomène de sauts involontaires de
-	combinaisons. 
-	Finalement, nous avons réglé le problème avec une décrémentation de l'index de la boucle (node) (si une combinaison est retirée de la liste). 
+	Nous avons observé le code et remarqué que la méthode getElement() itère déjà dans la liste et que getNbElement() nous donne aussi la longueur de la liste. 
+	Nous les avons donc mis à profit. De plus, une mécanique particulière s'est imposée : nous avons observé une situation où certaines combinaisons étaient 
+	ignorées lors des itérations. Cette situation nous a amené à découpé, débogué et inspecté chaque itération pour constater un phénomène de sauts involontaires
+	de combinaisons. Finalement, nous avons réglé le problème avec une décrémentation de l'index de la boucle (node) (si une combinaison est retirée de la liste). 
 	
 	Voici une représentation graphique qui explique l'utilisation de la décrémentation:
 	
@@ -155,14 +154,14 @@ int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 													liste raccourcie de 1
 													0   1   2  <-3(4) <-4(5)
 							incrémentation de l'itérateur dans getElement() (++iter) maintenant valeur 4
-													0   1   2  "3"  4
+													0   1   2  "3"->4
 								    le nouvel index 3, précédemment 4, a donc été ignoré.
 				      décrémentation de l'index (node--) pour se remettre à la bonne position dans la liste.
 
-	La boucle se déplace en "Back & Forth" lors d'une suppression et itère normalement lorsqu'il n'y a pas de suppressions. Nous avons choisi cette 
-	logique car elle réutilise des méthodes existantes et cela évite de déclaré 2 itérateurs supplémentaires. 
+	La boucle se déplace en "Back & Forth" lors d'une suppression et itère normalement lorsqu'il n'y a pas de suppressions. Nous 
+	avons choisi cette logique car elle réutilise des méthodes existantes et cela évite de déclaré 2 itérateurs supplémentaires. 
 	La méthode est donc optimisée, très concise et verbeuse. Elle peut être lue et comprise comme un texte ;-).
-    ****************************************************************************************************************************************************/
+    *****************************************************************************************************************************************************************/
 }
 
 /// <summary>
@@ -191,17 +190,13 @@ void Mastermind::generateList(LinkedList<Combination>* _list)
 /// les adresses permettant leur suppression dans le destructeur.
 /// </summary>
 /// <param name="_list"> Liste nouvellement créée. </param>
-void Mastermind::fillTab(LinkedList<Combination>* _list)
+void Mastermind::fillTab()
 {
-	Node<Combination>* currentNode = _list->getFirstNode();
-
-	for (short node = 0; node < LISTLENGTH; node++)
+	for (short index = 0; index < LISTLENGTH; index++)
 	{
-		tabCombinations[node] = currentNode->getContent();
-		currentNode = currentNode->getNext();
+		tabCombinations[index] = this->getElement(index);
 	}
 }
-
 
 								/********************************************************************************************
 								Les deux méthodes suivantes ont une logique semblable, mais les avoir mis en une seule méthode
