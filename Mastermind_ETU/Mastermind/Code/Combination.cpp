@@ -3,6 +3,14 @@
 
 
 Combination::Combination(Color c1, Color c2, Color c3, Color c4)
+
+				/******************************************************************************************************************
+				*Cette surcharge d'opérateur a été implémenté simplement pour le plaisir de bien monter la liste chainée selon    *
+				*la logique qu'elle doit utiliser. Soit la comparaison < et > pour l'insertion des objets à la bonne positions.   *
+				*N'est pas nécessaire à la complétion du TP3 Mastermind car les combinaisons ne sont pas comparées avec leur      *
+				*valeur numérique. La composition des surcharges est simplement un plaisir personnel pour voir les bons résultats.*
+				*Surcharges composé par William.
+				******************************************************************************************************************/
 {
 	tabColors[0] = c1;
 	tabColors[1] = c2;
@@ -21,12 +29,6 @@ Combination::~Combination()
 	;
 }
 
-	/************************************************************************************************************
-	Cette surcharge d'opérateur a été implémenté simplement pour le plaisir de bien monter la liste chainée selon
-	la logique qu'elle doit utiliser. Soit la comparaison < et > pour l'insertion des objets à la bonne positions.
-	N'est pas nécessaire à la complétion du TP3 Mastermind car les combinaisons ne sont pas comparées avec leur
-	valeur numérique. La composition des surcharges est simplement un plaisir personnel pour voir les bons résultats.
-	**************************************************************************************************************/
 
 /// <summary>
 /// Surcharge de l'opérateur "<"

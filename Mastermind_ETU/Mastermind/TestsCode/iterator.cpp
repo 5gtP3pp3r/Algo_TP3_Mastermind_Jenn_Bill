@@ -9,10 +9,10 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace IteratorTest
-{
-															/**************************
-															Tests composés par Jennifer
-															**************************/
+															/****************************
+															*Tests composés par Jennifer*
+															****************************/
+{															
 	TEST_CLASS(Iterator_EN)
 	{
 	public:

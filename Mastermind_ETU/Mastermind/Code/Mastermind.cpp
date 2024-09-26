@@ -3,6 +3,11 @@
 
 
 Mastermind::Mastermind(LinkedList<Combination>* _list)
+
+													/******************************************************
+													* Tout le travail a été composé à 2 coéquipiers sauf  *
+													* si précisé autrement. (tests, surcharge Combinaison)*
+													******************************************************/
 {
 	generateList(_list);
 	fillTab(_list);

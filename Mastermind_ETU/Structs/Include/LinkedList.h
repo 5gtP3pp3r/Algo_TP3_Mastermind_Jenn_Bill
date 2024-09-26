@@ -7,10 +7,10 @@
 #include <Iterator.h>
 using namespace std;
 
-										/*******************************************************
-										Les méthodes de LinkedList.h on été implémentées par les 
-										méthode du travail de William qui ont passées les tests.
-										*******************************************************/
+										/*********************************************************
+										*Les méthodes de LinkedList.h on été implémentées par les*
+										*méthode du travail de William qui ont passées les tests.*
+										*********************************************************/
 
 template <class T>
 class LinkedList : public DataStructure<T>
