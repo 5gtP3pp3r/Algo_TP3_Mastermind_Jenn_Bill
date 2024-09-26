@@ -77,18 +77,18 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 		{																	// identiques (au meme index), la combinaison de la liste est invalide. Donc retirée dans cleanList().
 			return false;
 		}
-		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)	// Si la qualité est 2 (bonne couleur, mauvaise position), 
-		{																// et les couleurs sont différentes (au meme index),
-			if (!containsColorOnOtherIndex(_toValidate, colorTried, value))			// appel de la méthode containsColor, si la couleur
-			{															// n'est pas à un autre index, la combinaison de
-				return false;											// la liste est invalide. Donc retirée dans cleanList().
+		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)		// Si la qualité est 2 (bonne couleur, mauvaise position), 
+		{																	// et les couleurs sont différentes (au meme index),
+			if (!containsColorOnOtherIndex(_toValidate, colorTried, value))	// appel de la méthode containsColorOnOtherIndex(), si la couleur
+			{																// n'est pas à un autre index, la combinaison de
+				return false;												// la liste est invalide. Donc retirée dans cleanList().
 			}
 		}		
 		if (_tabVerdicts[value] == 3)										// Si la qualité est 3 (mauvaise couleur),
 		{
-			if (containsColor(_toValidate, colorTried))			// appel de la méthode containsColor, si la couleur
-			{															// est trouvée, la combinaison est invalide. 
-				return false;											// Donc retirée dans cleanList().
+			if (containsColor(_toValidate, colorTried))						// appel de la méthode containsColor, si la couleur
+			{																// est trouvée, la combinaison est invalide. 
+				return false;												// Donc retirée dans cleanList().
 			}
 		}
 	}
@@ -229,6 +229,12 @@ bool Mastermind::containsColorOnOtherIndex(Combination* _toValidate, Color _colo
 	return false;
 }
 
+/// <summary>
+/// Vérifie si une combinaison contient une couleur précise
+/// </summary>
+/// <param name="_toValidate"> Combinaison à vérifier. </param>
+/// <param name="_color"> Couleur à rechercher. </param>
+/// <returns> Booléen, est présent ou pas. </returns>
 bool Mastermind::containsColor(Combination* _toValidate, Color _color) const
 {
 	Color colorValidate = NULL;												// Exactement la même logique que la méthode Contains() en c#.
