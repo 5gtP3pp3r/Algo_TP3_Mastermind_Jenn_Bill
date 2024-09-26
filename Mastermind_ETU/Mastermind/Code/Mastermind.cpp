@@ -79,14 +79,14 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 		}
 		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)	// Si la qualité est 2 (bonne couleur, mauvaise position), 
 		{																// et les couleurs sont différentes (au meme index),
-			if (!containsColor(_toValidate, colorTried, value))			// appel de la méthode containsColor, si la couleur
+			if (!containsColorWithForbiddenIndex(_toValidate, colorTried, value))			// appel de la méthode containsColor, si la couleur
 			{															// n'est pas à un autre index, la combinaison de
 				return false;											// la liste est invalide. Donc retirée dans cleanList().
 			}
 		}		
 		if (_tabVerdicts[value] == 3)									// Si la qualité est 3 (mauvaise couleur),
 		{
-			if (containsColor(_toValidate, colorTried, value))			// appel de la méthode containsColor, si la couleur
+			if (containsColor(_toValidate, colorTried))			// appel de la méthode containsColor, si la couleur
 			{															// est trouvée, la combinaison est invalide. 
 				return false;											// Donc retirée dans cleanList().
 			}
@@ -204,7 +204,23 @@ void Mastermind::fillTab(LinkedList<Combination>* _list)
 /// <param name="_color"> Couleur à rechercher. </param>
 /// <param name="_forbiddenIndex"> Index présent dans la boucle cleanList(). </param>
 /// <returns> Booléen, est présent ou pas. </returns>
-bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _forbiddenIndex) const
+bool Mastermind::containsColorWithForbiddenIndex(Combination* _toValidate, Color _color, short _forbiddenIndex) const
+{
+	Color colorValidate = NULL;											// La logique est semblable a Contains() en c#,
+	                                                                    // mais on ajoute un index interdit pour le verdict 2.
+	for (short value = 0; value < VERDICTS_LENGTH; value++)
+	{
+		colorValidate = _toValidate->getColor(value);
+
+		if (colorValidate == _color && value != _forbiddenIndex )
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Mastermind::containsColor(Combination* _toValidate, Color _color) const
 {
 	Color colorValidate = NULL;											// Exactement la même logique que la méthode Contains() en c#.
 
@@ -212,7 +228,7 @@ bool Mastermind::containsColor(Combination* _toValidate, Color _color, short _fo
 	{
 		colorValidate = _toValidate->getColor(value);
 
-		if (colorValidate == _color && value != _forbiddenIndex )
+		if (colorValidate == _color)
 		{
 			return true;
 		}
