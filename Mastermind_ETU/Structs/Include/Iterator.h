@@ -69,7 +69,7 @@ Iterator<T> Iterator<T>::operator++()
 template <class T>
 T* Iterator<T>::operator & ()
 {
-	if (this->current->getContent() == NULL) {
+	if (this->current == NULL) {
 		return NULL;
 	}
 	return this->current->getContent();
