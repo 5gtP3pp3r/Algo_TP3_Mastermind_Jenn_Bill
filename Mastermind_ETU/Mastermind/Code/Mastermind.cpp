@@ -13,10 +13,10 @@ Mastermind::Mastermind(LinkedList<Combination>* _list)
 	list = _list;
 	fillTab();
 	//list->display();
-	for (int node = 0; node < LISTLENGTH; node++)						// Test d'affichage liste chainée et tableau.
+	/*for (int node = 0; node < LISTLENGTH; node++)						// Test d'affichage liste chainée et tableau.
 	{
 		tabCombinations[node]->display();
-	}
+	}*/
 }
 
 Mastermind::~Mastermind()
