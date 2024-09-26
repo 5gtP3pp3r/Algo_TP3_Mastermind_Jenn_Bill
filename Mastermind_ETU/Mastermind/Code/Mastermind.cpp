@@ -79,7 +79,7 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 		}
 		if (_tabVerdicts[value] == 2 && colorTried != colorValidate)	// Si la qualité est 2 (bonne couleur, mauvaise position), 
 		{																// et les couleurs sont différentes (au meme index),
-			if (!containsColorWithForbiddenIndex(_toValidate, colorTried, value))			// appel de la méthode containsColor, si la couleur
+			if (!containsColorOnOtherIndex(_toValidate, colorTried, value))			// appel de la méthode containsColor, si la couleur
 			{															// n'est pas à un autre index, la combinaison de
 				return false;											// la liste est invalide. Donc retirée dans cleanList().
 			}
@@ -217,28 +217,6 @@ bool Mastermind::containsColorOnOtherIndex(Combination* _toValidate, Color _colo
 {
 	Color colorValidate = NULL;												// Semblable à la même logique que la méthode Contains() en c#, mais
 																			// ne regarde pas la valeur à l'index présent qui devient "interdit"
-	for (short value = 0; value < VERDICTS_LENGTH; value++)
-	{
-		colorValidate = _toValidate->getColor(value);
-
-		if (colorValidate == _color && value != _forbiddenIndex )
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-/// <summary>
-/// Vérifie si une combinaison contient une couleur précise
-/// </summary>
-/// <param name="_toValidate"> Combinaison à vérifier. </param>
-/// <param name="_color"> Couleur à rechercher. </param>
-/// <returns> Booléen, est présent ou pas. </returns>
-bool Mastermind::containsColorOnOtherIndex(Combination* _toValidate, Color _color, short _forbiddenIndex) const
-{
-	Color colorValidate = NULL;											// La logique est semblable a Contains() en c#,
-	                                                                    // mais on ajoute un index interdit pour le verdict 2.
 	for (short value = 0; value < VERDICTS_LENGTH; value++)
 	{
 		colorValidate = _toValidate->getColor(value);
