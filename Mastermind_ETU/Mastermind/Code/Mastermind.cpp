@@ -112,7 +112,7 @@ bool Mastermind::isPossibleCombination(Combination* _toValidate, Combination* _t
 int Mastermind::cleanList(Combination* _ref, short* _tabVerdicts)
 {
 	short removedCombinations = 0;										// Déclaration d'une variable pour retourner le nombre de combinaison retirées.
-	short listLength = LISTLENGTH;										// Déclaration d'une variable qui contient la longueur de la liste à l'origine.
+	short listLength = getNbElements();									// Déclaration d'une variable qui contient la longueur de la liste à l'instant présent.
 	Combination* combToValidate = NULL;									// Déclaration d'un type pointeur de Combination.
 
 	for (short node = 0; node < listLength; node++)						// Itération à la longueur de la liste
